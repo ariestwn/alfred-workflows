@@ -1,0 +1,12 @@
+/target/
+/dist/
+/workflow/uninstaller
+/workflow/icon.png
+/workflow/checked.png
+/workflow/unchecked.png
+/workflow/trash.png
+/workflow/back.png
+/workflow/warning.png
+/licenses/
+__pycache__/
+.DS_Store

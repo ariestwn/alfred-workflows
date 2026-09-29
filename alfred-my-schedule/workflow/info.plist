@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ariestwn.my-schedule-rust</string>
+	<key>name</key>
+	<string>My Schedule</string>
+	<key>createdby</key>
+	<string>ariestwn</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>version</key>
+	<string>0.1.2</string>
+	<key>description</key>
+	<string>Your macOS Calendar agenda in Alfred. Powered by Rust and EventKit.</string>
+	<key>disabled</key>
+	<false/>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>uid</key>
+			<string>EBF7B825-899F-5FEF-ACA3-F59B738DD263</string>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>{var:SCHEDULE_KEYWORD}</string>
+				<key>title</key>
+				<string>My Schedule</string>
+				<key>subtext</key>
+				<string>Upcoming events, next meeting, and title search</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Reading your schedule…</string>
+				<key>script</key>
+				<string>exec "./My Schedule.app/Contents/MacOS/my-schedule" agenda -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>5A6674F3-D202-5A06-BDBF-1D4387141321</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>agenda</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>733F6870-10F5-5EFE-8543-36D607A33A7A</string>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>snext</string>
+				<key>title</key>
+				<string>Next Meeting</string>
+				<key>subtext</key>
+				<string>Open or join your next meeting</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Reading your schedule…</string>
+				<key>script</key>
+				<string>exec "./My Schedule.app/Contents/MacOS/my-schedule" next -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>9CBE5343-B381-5E07-9F0B-85CE5B5F1EC3</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>next</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>B06E7071-D537-579B-BA41-0E7F2E178C1D</string>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>scal</string>
+				<key>title</key>
+				<string>Choose Calendars</string>
+				<key>subtext</key>
+				<string>Choose which synced calendars appear in My Schedule</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Reading your schedule…</string>
+				<key>script</key>
+				<string>exec "./My Schedule.app/Contents/MacOS/my-schedule" calendars -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>2BFC526A-A4AF-5B74-8841-1F1D7A6A289F</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>calendars</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>3AB93565-81C1-53B4-B929-5BDF2D1BC70E</string>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>snew</string>
+				<key>title</key>
+				<string>Create Event</string>
+				<key>subtext</key>
+				<string>Title | today 14:00 | 60 | calendar (optional)</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Reading your schedule…</string>
+				<key>script</key>
+				<string>exec "./My Schedule.app/Contents/MacOS/my-schedule" new -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>1BE14E7F-5338-5E67-A35A-BCA5CED5C81F</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>new</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>79BE8CB9-DF19-5D2D-BC65-F0476F02A4AC</string>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>sfree</string>
+				<key>title</key>
+				<string>Copy Availability</string>
+				<key>subtext</key>
+				<string>Free time: today, tomorrow, week, or YYYY-MM-DD</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Reading your schedule…</string>
+				<key>script</key>
+				<string>exec "./My Schedule.app/Contents/MacOS/my-schedule" free -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>F4F29753-9524-59BC-AC4A-4190D6B6417C</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>free</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>C1E15859-29F6-52B3-8EA4-1645FDEE3B29</string>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string></string>
+				<key>title</key>
+				<string>Event Actions</string>
+				<key>subtext</key>
+				<string>Join, copy details, or manage in Calendar</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Reading your schedule…</string>
+				<key>script</key>
+				<string>exec "./My Schedule.app/Contents/MacOS/my-schedule" menu -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>A717CF96-2944-563E-9EEC-C56CA13CE648</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>3E66D119-CBBB-5151-A42D-C78CEF46D8BB</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:SCHEDULE_ACTION}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>copy</string>
+						<key>outputlabel</key>
+						<string>Copy</string>
+						<key>uid</key>
+						<string>152F1C09-0B0C-5600-B2AD-5EE26DA079C2</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:SCHEDULE_ACTION}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>menu</string>
+						<key>outputlabel</key>
+						<string>Menu</string>
+						<key>uid</key>
+						<string>3A9C035F-3B52-5CA6-BE67-E4E10C97229D</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Run action</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>D0476BF0-4DF6-586A-A988-C9EF875EE301</string>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>AE330302-585B-5DA8-ADA9-0B1945C1EB00</string>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>config</key>
+			<dict>
+				<key>script</key>
+				<string>exec "./My Schedule.app/Contents/MacOS/my-schedule" act -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+				<key>concurrently</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>connections</key>
+	<dict>
+		<key>EBF7B825-899F-5FEF-ACA3-F59B738DD263</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>5A6674F3-D202-5A06-BDBF-1D4387141321</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EBF7B825-899F-5FEF-ACA3-F59B738DD263</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>733F6870-10F5-5EFE-8543-36D607A33A7A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>9CBE5343-B381-5E07-9F0B-85CE5B5F1EC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>733F6870-10F5-5EFE-8543-36D607A33A7A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>B06E7071-D537-579B-BA41-0E7F2E178C1D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>2BFC526A-A4AF-5B74-8841-1F1D7A6A289F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B06E7071-D537-579B-BA41-0E7F2E178C1D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>3AB93565-81C1-53B4-B929-5BDF2D1BC70E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>1BE14E7F-5338-5E67-A35A-BCA5CED5C81F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3AB93565-81C1-53B4-B929-5BDF2D1BC70E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>79BE8CB9-DF19-5D2D-BC65-F0476F02A4AC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>F4F29753-9524-59BC-AC4A-4190D6B6417C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>79BE8CB9-DF19-5D2D-BC65-F0476F02A4AC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>C1E15859-29F6-52B3-8EA4-1645FDEE3B29</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>A717CF96-2944-563E-9EEC-C56CA13CE648</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EBF7B825-899F-5FEF-ACA3-F59B738DD263</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>3E66D119-CBBB-5151-A42D-C78CEF46D8BB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>733F6870-10F5-5EFE-8543-36D607A33A7A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D0476BF0-4DF6-586A-A988-C9EF875EE301</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+				<key>sourceoutputuid</key>
+				<string>152F1C09-0B0C-5600-B2AD-5EE26DA079C2</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>C1E15859-29F6-52B3-8EA4-1645FDEE3B29</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+				<key>sourceoutputuid</key>
+				<string>3A9C035F-3B52-5CA6-BE67-E4E10C97229D</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>AE330302-585B-5DA8-ADA9-0B1945C1EB00</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+	</dict>
+	<key>uidata</key>
+	<dict>
+		<key>EBF7B825-899F-5FEF-ACA3-F59B738DD263</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>5A6674F3-D202-5A06-BDBF-1D4387141321</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>733F6870-10F5-5EFE-8543-36D607A33A7A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>220</integer>
+		</dict>
+		<key>9CBE5343-B381-5E07-9F0B-85CE5B5F1EC3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>220</integer>
+		</dict>
+		<key>B06E7071-D537-579B-BA41-0E7F2E178C1D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>400</integer>
+		</dict>
+		<key>2BFC526A-A4AF-5B74-8841-1F1D7A6A289F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>400</integer>
+		</dict>
+		<key>3AB93565-81C1-53B4-B929-5BDF2D1BC70E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>580</integer>
+		</dict>
+		<key>1BE14E7F-5338-5E67-A35A-BCA5CED5C81F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>580</integer>
+		</dict>
+		<key>79BE8CB9-DF19-5D2D-BC65-F0476F02A4AC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>760</integer>
+		</dict>
+		<key>F4F29753-9524-59BC-AC4A-4190D6B6417C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>760</integer>
+		</dict>
+		<key>C1E15859-29F6-52B3-8EA4-1645FDEE3B29</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>940</integer>
+		</dict>
+		<key>A717CF96-2944-563E-9EEC-C56CA13CE648</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>1030</integer>
+		</dict>
+		<key>3E66D119-CBBB-5151-A42D-C78CEF46D8BB</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>1150</integer>
+		</dict>
+		<key>E1B359F7-65C5-54F4-A27B-20C83CE45AFA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>590</integer>
+			<key>ypos</key>
+			<integer>340</integer>
+		</dict>
+		<key>D0476BF0-4DF6-586A-A988-C9EF875EE301</key>
+		<dict>
+			<key>xpos</key>
+			<integer>880</integer>
+			<key>ypos</key>
+			<integer>160</integer>
+		</dict>
+		<key>AE330302-585B-5DA8-ADA9-0B1945C1EB00</key>
+		<dict>
+			<key>xpos</key>
+			<integer>880</integer>
+			<key>ypos</key>
+			<integer>480</integer>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_KEYWORD</string>
+			<key>label</key>
+			<string>Schedule keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>schedule</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_DAYS</string>
+			<key>label</key>
+			<string>Look ahead (days)</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>90</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>7</string>
+						<string>7</string>
+					</array>
+					<array>
+						<string>14</string>
+						<string>14</string>
+					</array>
+					<array>
+						<string>30</string>
+						<string>30</string>
+					</array>
+					<array>
+						<string>60</string>
+						<string>60</string>
+					</array>
+					<array>
+						<string>90</string>
+						<string>90</string>
+					</array>
+					<array>
+						<string>180</string>
+						<string>180</string>
+					</array>
+					<array>
+						<string>365</string>
+						<string>365</string>
+					</array>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_SHOW_ALL_DAY</string>
+			<key>label</key>
+			<string>All-day events</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>text</key>
+				<string>Show all-day events</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_SHOW_DECLINED</string>
+			<key>label</key>
+			<string>Declined invitations</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>text</key>
+				<string>Show declined events in the agenda</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_MEET_BROWSER</string>
+			<key>label</key>
+			<string>Google Meet browser</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Default browser</string>
+						<string></string>
+					</array>
+					<array>
+						<string>Google Chrome</string>
+						<string>com.google.Chrome</string>
+					</array>
+					<array>
+						<string>Safari</string>
+						<string>com.apple.Safari</string>
+					</array>
+					<array>
+						<string>Arc</string>
+						<string>company.thebrowser.Browser</string>
+					</array>
+					<array>
+						<string>Brave</string>
+						<string>com.brave.Browser</string>
+					</array>
+					<array>
+						<string>Microsoft Edge</string>
+						<string>com.microsoft.edgemac</string>
+					</array>
+					<array>
+						<string>Firefox</string>
+						<string>org.mozilla.firefox</string>
+					</array>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_TIMEZONE</string>
+			<key>label</key>
+			<string>Display timezone</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>auto</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>auto follows macOS. Or use an IANA name such as Asia/Jakarta.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_WORK_START</string>
+			<key>label</key>
+			<string>Workday starts (hour)</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>9</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>0–23, in the display timezone. Used when copying availability.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_WORK_END</string>
+			<key>label</key>
+			<string>Workday ends (hour)</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>17</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>1–24. Must be later than the start hour.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SCHEDULE_MINIMUM_FREE</string>
+			<key>label</key>
+			<string>Minimum free slot (minutes)</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>30</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<true/>
+			</dict>
+		</dict>
+	</array>
+	<key>variables</key>
+	<dict/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>readme</key>
+	<string># My Schedule for Alfred
+
+A Rust workflow for your native macOS Calendar agenda, inspired by Raycast's My Schedule command. It reads Google, iCloud, Exchange, and other calendars already syncing in Calendar via EventKit. A small compiled Objective-C bridge calls Apple's frameworks; agenda logic, filtering, grouping, availability, link detection, and workflow actions run in Rust. No Raycast, Python, Node, or Rust installation is needed at runtime.
+
+## Install
+
+Download the Apple Silicon or Intel build from the [releases page](https://github.com/ariestwn/alfred-workflows/releases) and open it in Alfred. Requires **Alfred 5 with Powerpack** and **macOS 14 or later**. Each build contains a native helper for one architecture only.
+
+Type `schedule`, select **Allow calendar access**, and allow **Full Access** when macOS asks. EventKit requires full access to read your schedule. If access was previously denied, open System Settings → Privacy &amp; Security → Calendars and enable Alfred / My Schedule. Your calendar accounts must already be configured and syncing in the macOS Calendar app.
+
+The first time an action returns to Alfred, macOS may ask for Automation access to Alfred. Opening an event uses Calendar's local URL handler and does not require Calendar Automation access.
+
+## Commands
+
+| Command | Behavior |
+| --- | --- |
+| `schedule` | Greeting, today's remaining events, next meeting, and upcoming agenda |
+| `schedule planning` | Filter event titles; multiple words can appear anywhere in the title |
+| `schedule tomorrow` | Tomorrow's events |
+| `schedule today design` | Today's events with “design” in the title |
+| `schedule week` / `schedule month` | Remaining current week or month |
+| `schedule 2026-10-01` | Events on a specific upcoming date |
+| `snext` | Next ongoing/upcoming timed event; Return joins if it has a supported call link |
+| `scal` | Show/hide calendars; Return toggles, then choose Back to My Schedule |
+| `snew` | Create an event with a reviewable preview |
+| `sfree today` / `sfree tomorrow` / `sfree week` | Copy free slots within your configured work hours |
+
+Two unassigned Hotkey blocks open the agenda or next meeting directly. Set shortcuts in the workflow editor. Only the main `schedule` keyword is configurable; the helper commands above can be edited on their Script Filter blocks.
+
+## Agenda and event actions
+
+The first row summarizes today; **Next up** shows the next timed event, including an event currently in progress. All-day, canceled, and declined events are excluded from Next up. The summary remains visible while searching so you do not lose track of your next meeting.
+
+Events are grouped into remaining days of this week, next week, the rest of the current month, and subsequent months. This is an Alfred list with title/subtitle rows and section labels, rather than Raycast's custom two-column layout or dropdown. Use `scal` for the calendar picker. Calendar names are accompanied by account/source names so calendars with identical titles can be distinguished.
+
+- **Return:** open the selected event in Calendar, including the chosen occurrence of a recurring event. Calendar starts automatically if it is closed.
+- **Command-Return:** join the conference call; disabled if no supported link exists.
+- **Option-Return:** open event actions (join, copy conference link, open in Calendar, copy details/title/attendees).
+- **Shift-Return:** copy event details.
+- **Command-Shift-Return:** copy event title.
+- **Control-Return:** copy attendees.
+- **Command-C:** copy event details. **Command-L:** show details in Large Type.
+- **Option-Return on the greeting:** choose calendars.
+
+Event rows show date/time, calendar, RSVP status when available, attendee count, recurrence, and conference provider. Declined invitations are hidden by default; all-day events are shown. Both are configurable. Canceled events are always hidden. Live results refresh every five seconds, using an EventKit snapshot cached for at most twenty seconds. **Refresh schedule** forces a fresh read. Large agendas show 250 matching events at a time; use title or date filters to find later events. Look ahead defaults to 90 days and supports up to 365.
+
+Version 0.1.2 replaces Calendar AppleScript navigation after both `AppleEvent handler failed (-10000)` and `Connection is invalid (-609)` were reported. It opens Calendar directly with the local EventKit item identifier and occurrence date. Timed recurring events use UTC; all-day recurring events use the Mac's local date, independently of the agenda display timezone. Non-recurring events use their item identifier alone. The Calendar URL convention is also used in Raycast's [Menu Bar Calendar extension](https://github.com/raycast/extensions/blob/36abdaacac9b02cbbc54dbe33f16b6c40cd23f54/extensions/menubar-calendar/swift/AppleReminders/Sources/Calendar.swift).
+
+## Conference calls
+
+Links are detected in the event URL, location, and notes. Supported host names cover Zoom, Google Meet, Microsoft Teams, Slack Huddles, Webex, FaceTime, Skype, BlueJeans, Amazon Chime, Whereby, Jitsi (`meet.jit.si` / `jitsi.org`), Around, Chorus, Riverside, and StreamYard. Self-hosted Jitsi domains and indirect redirect links are not auto-detected. Provider links use HTTPS and are checked against domain boundaries before opening.
+
+Zoom `/j/` links open the Zoom app when installed, and Microsoft Teams links open the current Teams app when installed. Other links use the browser or the provider's usual app handoff. Set a preferred Google Meet browser in Workflow Configuration, or leave the default browser selected. Links are opened only when you choose Join; joining does not enable the microphone or camera itself.
+
+## Create an event / block focus time
+
+Type `snew Focus time | tomorrow 14:00 | 60`. A preview appears for each writable calendar, with the default calendar first. Press Return on the desired calendar to save. Typing and browsing previews never creates events.
+
+The full input is:
+
+```text
+snew Title | start | minutes | calendar | location | HTTPS URL | notes
+```
+
+Only the first three fields are required. Leave optional fields blank to skip them. Calendar matching uses an exact title or identifier; matching calendars from different accounts remain separate choices. Times accept `today 14:00`, `tomorrow 14:00`, `YYYY-MM-DD HH:MM`, or an ISO timestamp with an explicit offset. The display timezone defaults to macOS and can be overridden. Invalid or repeated DST clock times require an explicit ISO offset. Durations are 1 minute to 7 days. Saved events open in Calendar for further editing. Identical submitted previews are recorded locally to prevent accidental duplicate creation.
+
+EventKit does not expose setters for attendee RSVP status or attendees. Use **Open in Calendar** to accept/decline invitations, manage attendees, add reminders, change recurrence, edit, or delete events. Creating events through this workflow does not invite or email anyone.
+
+## Availability
+
+`sfree` lists free intervals across your **enabled calendars**. Work hours default to 09:00–17:00, with a minimum free slot of 30 minutes. `week` means the next seven calendar days, excluding Saturday/Sunday; an explicitly selected date can be a weekend. Overlapping busy events are merged. All-day busy events still block the day even when hidden from the agenda. Events marked Free, canceled events, and declined invitations do not block time. Tentative and pending invitations count as busy. Today's slots start no earlier than now. Holidays only block time if represented by a busy event on an enabled calendar.
+
+## Scope and privacy
+
+This implements the My Schedule agenda, title search, calendar selection, manual call joining, copying details/availability, and event creation with a preview. Raycast-specific AI chat, arbitrary action-panel shortcuts, auto-join, camera preview, transcription, and a persistent menu-bar app are not included. Invitation changes, attendee management, advanced editing, and deletion use the native Calendar app.
+
+There are no external services, API keys, analytics, or background daemons. Calendar data stays on this Mac; its accounts continue syncing normally through macOS. Private snapshots live in Alfred's workflow cache with mode 0600, and visibility preferences/submitted-create markers live in Alfred's workflow data directory. The export contains no event data or account identifiers. Uninstalling the workflow does not delete any calendar events.
+
+## Build and verify
+
+```sh
+./scripts/cargo.sh test --locked --offline
+./scripts/cargo.sh clippy --locked --offline --all-targets -- -D warnings
+./build.sh
+```
+
+Requires Rust, Xcode command line tools, and Python 3 at build time. The wrapper uses Cargo from PATH or the sibling `alfred-quickai/.tools` toolchain. Dependencies must be cached first (`./scripts/cargo.sh fetch --locked` if needed). The build compiles the EventKit bridge, embeds Calendar usage descriptions, signs the helper app, renders icons, bundles dependency notices, and validates the workflow archive.
+
+Packaging and the local installer tag build, installed, and backup helper apps with `alfred:ignore`, preserving existing Finder tags. This keeps technical copies out of Alfred's application results while `schedule` continues to run the workflow. The convention is documented by the [Alfred team](https://alfred.app/workflows/alfredapp/ignore-in-alfred/).
+
+Tests use synthetic events, deterministic dates, and temporary directories; they do not read real calendars, join calls, or create events. `--fixture /path/to/snapshot.json` is available on read-only CLI commands for testing. `status` reads only the macOS authorization state. EventKit write operations are never used by automated tests.
+
+References: [Apple EventKit access](https://developer.apple.com/documentation/eventkit/accessing-the-event-store), [Alfred Script Filter JSON](https://www.alfredapp.com/help/workflows/inputs/script-filter/json/). Calendar's installed URL handler supports the `ical://ekevent` navigation scheme.
+</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>

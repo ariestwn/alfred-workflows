@@ -1,0 +1,18 @@
+[package]
+name = "alfred-uninstaller"
+version = "0.4.1"
+edition = "2021"
+rust-version = "1.85"
+description = "Uninstall apps and selected related files from Alfred, including Homebrew casks"
+license = "MIT"
+
+[dependencies]
+libc = "0.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tempfile = "3"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

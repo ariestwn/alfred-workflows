@@ -1,0 +1,8 @@
+/target/
+/dist/
+/licenses/
+/workflow/My Schedule.app/
+/workflow/icon.png
+/workflow/icons/
+__pycache__/
+.DS_Store

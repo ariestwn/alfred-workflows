@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Build artifacts (rebuild via ./build.sh)
+workflow/audio_format
+workflow/Apple Music Audio Watcher.app/
+dist/
+
+# Editor swap files
+*.swp
+*.swo

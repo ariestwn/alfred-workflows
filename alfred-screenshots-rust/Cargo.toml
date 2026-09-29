@@ -1,0 +1,17 @@
+[package]
+name = "alfred-screenshots-rust"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+description = "A paginated Alfred screenshot browser with native cached thumbnails"
+license = "MIT"
+
+[dependencies]
+libc = "0.2"
+serde_json = "1"
+tempfile = "3"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

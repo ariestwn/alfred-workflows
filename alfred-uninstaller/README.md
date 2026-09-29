@@ -1,0 +1,116 @@
+# Uninstaller Rust for Alfred
+
+Find an app, review its related files, and uninstall it. Homebrew casks are removed through Homebrew; Finder moves other apps and selected leftover files to the macOS Trash, requesting Touch ID or an administrator password when needed. All workflow logic is Rust. The workflow uses Alfred's own result list for app search, file selection and the final report.
+
+## Install and use
+
+Download the Apple Silicon or Intel build from the [releases page](https://github.com/ariestwn/alfred-workflows/releases) and import it into Alfred 5 with Powerpack. Reimport to update an older version. Requires macOS 12 or later. Each build contains a native executable for one architecture only. Rust, Python, and Swift are not needed at runtime. Homebrew-managed apps use your existing Homebrew installation.
+
+1. Type **uninstall**, optionally followed by an app name or bundle identifier.
+2. Press Return on an app to display its files. Every discovered file starts checked, sorted by size from largest to smallest.
+3. Use **⌘Return** on a file to select or deselect it. Type to filter paths; hidden selections stay selected and count toward the total.
+4. Press **Return** on the uninstall header or any file to uninstall the displayed selection immediately. There is no additional confirmation screen.
+
+| Shortcut in the file list | Action |
+| --- | --- |
+| Return | Uninstall the selected app and files |
+| ⌘Return on a file | Select or deselect that file |
+| ⌘Return on the header | Select all or deselect all |
+| ⌃Return | Open Actions: selection, sorting, and scan details |
+| ⌥Return on a file | Reveal in Finder |
+| ⌘C | Copy the file path |
+| Shift | Preview the file with Alfred's Quick Look |
+
+After removal, **Return** or **⌥Return** on the summary opens Trash in Finder. On an individual result, either shortcut reveals that file at its current reported location, including inside Trash. Files already removed by Homebrew, restored elsewhere, or emptied from Trash say “No file to reveal.”
+
+The header shows the number and total size of selected files. Files use their native icons and show only name, parent folder, and size. **Actions → Scan details** contains matching reasons, Homebrew scope, and scan notices. For example, “Cannot inspect ~/Library/Cookies” means macOS denied access to that folder; it does not mean a related file was found there. These notices do not add rows to the main file list. An error that prevents an uninstall stays visible in the header.
+
+Deselect the application bundle to remove only selected app data. The header then says the app will be kept, and its Homebrew registration is retained. The Actions menu can select all files, clear the selection, or switch between size and path sorting. Filtering is preserved when toggling or returning from Actions.
+
+An **Uninstall Application…** file Universal Action and an external trigger named `uninstall_app` accept a single `.app` path. They open the same file list. The app must be inside a configured application folder.
+
+## Finder authorization
+
+The workflow sends Finder one native Apple event containing the selected files. Finder handles the Trash operation and can display the macOS Touch ID/password authorization prompt for protected apps. Credentials are handled entirely by macOS. The Rust executable does not collect passwords, invoke sudo, change ownership, or permanently delete files.
+
+The first use may ask whether **Alfred can control Finder**. Allow this to enable removal. If it was denied, enable **System Settings → Privacy & Security → Automation → Alfred → Finder**. Full Disk Access helps with file discovery; it does not replace administrator authorization for protected file operations.
+
+A cancellation or error can happen after Finder has moved some files. The workflow follows native file bookmarks and verifies the destination's file identity before counting an item as moved. The result shows completed moves and remaining files separately. If a destination cannot be verified, it says to inspect Finder rather than assuming success. Finder has up to five minutes to reply; after a timeout, check its authorization window and Trash before starting another scan because Finder may still be working. The workflow never retries a removal automatically.
+
+## Homebrew casks
+
+The workflow detects installed casks using `brew info --json=v2 --cask --installed`. It prefers the installed receipt's artifacts over a newer cask definition and uses the recorded app directory and renamed targets. Association requires an exact app target or an explicit uninstall reference to the app's path or bundle ID. It never guesses a cask token from an app name. Apple Silicon and Intel Homebrew installations are checked, followed by other `brew` executables on PATH. **Configure Workflow → Homebrew executable** can select one particular installation by absolute path.
+
+When the application bundle is selected, the workflow rechecks the cask and its uninstall plan, then runs:
+
+```sh
+brew uninstall --cask -- <installed-cask-token>
+```
+
+Homebrew runs before any selected file is moved, so its uninstall scripts can still access the app. The workflow verifies that `brew list --cask` no longer lists the cask before cleaning up leftover files. Selected files already removed by Homebrew are reported as such. If the cask record is removed but the original app bundle remains, that unchanged bundle is moved to Trash as a leftover.
+
+The header labels Homebrew-managed apps and shows when a cask includes other apps. **Actions → Scan details** lists the cask scope. Homebrew removes the **whole cask**, including other app artifacts and its own installed components or uninstall routines. Those routines may permanently delete files; restoring the application can require `brew install --cask <token>`. The size summary covers the listed file selection, not every Homebrew component.
+
+`--zap`, `--force`, and dependency ignoring are not used. Automatic dependency removal, automatic updates, and analytics are disabled for these commands. The workflow's extra data cleanup uses only the files you selected. A cask's own uninstall routine can have additional effects, which are separate from those leftover selections.
+
+If ownership cannot be verified, app removal is blocked instead of silently bypassing Homebrew. You can still deselect the app to clean selected data only. An uninstall error, timeout, or cask that remains registered stops further cleanup and displays the failure. Homebrew may already have made partial changes; the workflow does not automatically retry or fall back to deleting the app. Commands are noninteractive with a three-minute uninstall timeout. If a cask requires administrator authentication, complete its uninstall in Terminal.
+
+This handles GUI casks with a verifiable app association. It does not uninstall formulae, edit Brewfiles, or infer ownership for package-based casks that expose no matching app target or uninstall reference. Apps installed through such packages should use Homebrew directly. Old reviews made before Homebrew support must be scanned again before removing the app.
+
+## How files are found
+
+The scanner reads binary or XML `Contents/Info.plist` through Core Foundation, then matches the app's bundle identifier and names against entries in the current user's `~/Library` and `/Library`:
+
+| Location | Match |
+| --- | --- |
+| Application Support, Caches, Logs, WebKit, Containers | Exact bundle identifier |
+| Preferences | `<bundle-id>.plist` |
+| Preferences/ByHost | `<bundle-id>.<UUID>.plist` |
+| HTTPStorages | `<bundle-id>` and `<bundle-id>.binarycookies` |
+| Cookies | `<bundle-id>.binarycookies` |
+| Saved Application State | `<bundle-id>.savedState` |
+| Application Support, Logs | Exact app name |
+
+Identifier matching is case insensitive. The scanner does not use partial names or vendor prefixes. If another discovered app has the same name, app-name matches are omitted. If another installed copy has the same bundle ID, all related data is omitted because those copies may share it. The app itself can still be selected.
+
+Application search covers `/Applications` and `~/Applications`, including up to three nested grouping folders. It stops at app bundles. Add other application folders, one absolute or `~/` path per line, in **Configure Workflow → Additional application folders**. This setting also defines the scope for Universal Actions.
+
+Sizes are approximate logical file sizes, not guaranteed reclaimed disk space. Hard links within each candidate are counted once; symbolic links are not followed. Size calculation has time and entry limits. A `≥` prefix means the number is a lower bound because traversal was incomplete or access was denied. A directory is one selected entry even if it contains many files.
+
+## Removal behavior and limits
+
+- Return uninstalls directly from the file list. The selection revision, file identities, and current associations are checked again before execution; stale actions and repeated execution are rejected.
+- Command and Control shortcuts have explicit Alfred connections to an edit-only handler. That handler rejects uninstall requests, even if it receives the default row argument.
+- Running app executables and helpers inside the bundle block removal. Other app targets in a selected cask are checked too. Quit them normally and try again. The workflow itself does not quit or force-kill apps; Homebrew may execute a cask's own uninstall directives.
+- The scanner rechecks association, path, device, inode, and file type before moving anything, then validates the entire remaining selection immediately before handing it to Finder. Replaced entries and symbolic links are rejected.
+- For managed casks, Homebrew runs first; a Homebrew failure prevents the Finder request. Otherwise, the remaining selected paths go to Finder in one batch, with the application listed first. Finder controls processing order and may complete part of the batch before a cancellation or failure. There is no automatic rollback; the final report identifies verified moves.
+- Extra file cleanup uses Finder's native Trash command (`core` / `delo`) through Foundation's Apple-event API. It never sends Finder's empty-Trash command. Homebrew performs its normal cask uninstall, which may delete files. Finder automation denial, cancellation, timeout, and other macOS failures are reported.
+- Built-in Apple apps, Alfred itself, nested helper apps, and symlinked application bundles are excluded. Symlink installs can be reviewed only by adding and choosing their actual installation folder.
+- The leftover scanner excludes shared Group Containers, launch agents/daemons, privileged helpers, system extensions, package receipts, keychain entries, and files in custom locations. A detected cask's own uninstall routine may manage its installed components. Other apps with services or drivers should use their vendor's uninstaller. This workflow is a conservative file finder, not a complete installer database.
+
+File scanning is local. Homebrew uses its normal metadata and cask routines; the workflow disables Homebrew analytics and automatic updates. Temporary reviews, cask plans, and per-file results are stored in a private `reviews` subdirectory of Alfred's workflow cache (fallback: `~/Library/Caches/com.ariestwn.uninstaller-rust`). Reviews expire after one hour and expired files are pruned on the next review. Interrupted operations cannot be replayed; inspect each reported item and Homebrew's installed state. Recover files moved to Trash through Finder while they remain there. Restore the app to its original location or reinstall its cask before starting a fresh app scan.
+
+## Build and verify
+
+```sh
+./scripts/cargo.sh test --locked --offline
+./scripts/cargo.sh clippy --locked --offline --all-targets -- -D warnings
+./build.sh
+```
+
+Requires Rust, Xcode command line tools, and Python 3 for packaging. `scripts/cargo.sh` falls back to this workspace's `alfred-quickai/.tools` Rust installation when Cargo is not on PATH. If dependencies are not cached, run `./scripts/cargo.sh fetch --locked` once with network access. Artwork and packaging use only Python's standard library; they are build tools, not workflow dependencies.
+
+Tests create isolated fake apps and Library trees. They cover the Zoom screenshot paths, binary and XML metadata, ambiguous names, duplicates, symlinks, changed files, protected apps, running processes, stale selections, partial failures, and selection-only execution. UI tests cover default selection, strict size ordering, Return/⌘Return behavior, filter persistence, and separate scan details. Homebrew tests use a fake executable to verify ownership, installed receipts, command arguments, uninstall ordering, registry removal, failure handling, data-only cleanup, and multi-app scope disclosure. Normal tests use an isolated fake Trash and do not uninstall real casks. An optional native integration test creates one temporary text fixture, asks Finder to move it to the real macOS Trash, follows its bookmark, verifies its contents, and restores it:
+
+```sh
+./scripts/cargo.sh test --locked --offline native_trash_roundtrip -- --ignored --exact tests::native_trash_roundtrip
+```
+
+Read-only CLI checks:
+
+```sh
+./workflow/uninstaller list zoom
+./workflow/uninstaller scan /Applications/zoom.us.app
+```
+
+References: [Alfred Script Filter JSON](https://www.alfredapp.com/help/workflows/inputs/script-filter/json/), [Apple Library directory conventions](https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html), [Foundation Apple-event API](https://developer.apple.com/documentation/foundation/nsappleeventdescriptor/sendevent(options:timeout:)), [Homebrew manual](https://docs.brew.sh/Manpage), [Homebrew cask uninstall routines](https://docs.brew.sh/Cask-Cookbook#stanza-uninstall).

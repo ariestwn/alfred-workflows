@@ -1,0 +1,17 @@
+[package]
+name = "alfred-kraely-upload"
+version = "0.1.1"
+edition = "2021"
+rust-version = "1.85"
+description = "Alfred Universal Action to upload a file over SSH and copy its remote path"
+license = "MIT"
+
+[dependencies]
+libc = "0.2"
+serde_json = "1"
+tempfile = "3"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

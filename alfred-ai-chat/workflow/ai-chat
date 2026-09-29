@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eu
+cd -- "$(dirname -- "$0")"
+export PATH="$HOME/.local/bin:$HOME/.opencode/bin:$HOME/.npm-global/bin:$HOME/.volta/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:${PATH:-}"
+exec /usr/bin/python3 -B ./chat.py "$@"

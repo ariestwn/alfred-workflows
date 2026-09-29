@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ariestwn.emoji</string>
+	<key>name</key>
+	<string>Emoji</string>
+	<key>description</key>
+	<string>Emoji grid with keyword and Jev semantic search.</string>
+	<key>createdby</key>
+	<string>ariestwn</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>version</key>
+	<string>0.1.0</string>
+	<key>disabled</key>
+	<false/>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>uid</key>
+			<string>B84C175E-9592-52B7-9AE0-242A75D7E373</string>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>{var:EMOJI_KEYWORD}</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>text</key>
+				<string>Search Emoji &amp; Symbols</string>
+				<key>subtext</key>
+				<string>Type a word, feeling, or situation, then Return</string>
+				<key>withspace</key>
+				<true/>
+				<key>skipuniversalaction</key>
+				<true/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>DE46A237-59A5-5D45-8212-7B05A2123D92</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>EMOJI_PAGE</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>9655D3A3-EBA7-5A90-93E7-454210F00B53</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>browse</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>9CED709F-36EB-5CCD-A2A5-81B6C2168AEE</string>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.grid</string>
+			<key>config</key>
+			<dict>
+				<key>columncount</key>
+				<integer>8</integer>
+				<key>filterable</key>
+				<false/>
+				<key>fixedorder</key>
+				<true/>
+				<key>imageaspect</key>
+				<integer>0</integer>
+				<key>inputfile</key>
+				<string>grid</string>
+				<key>inputtype</key>
+				<integer>1</integer>
+				<key>loadingtext</key>
+				<string>🔍 Looking for an emoji…</string>
+				<key>showsubtitles</key>
+				<false/>
+				<key>showtitles</key>
+				<true/>
+				<key>subtitlesinfooter</key>
+				<true/>
+				<key>titlesinfooter</key>
+				<true/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>0B48D109-D86B-5014-AF0A-2C43255D13AA</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:EMOJI_KIND}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>page</string>
+						<key>outputlabel</key>
+						<string>Change page</string>
+						<key>uid</key>
+						<string>3CD2AFBF-D23C-550C-A480-CF4E46C5FA2B</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Emoji</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>CE943DE9-DE58-5BFE-A130-79C858D1C887</string>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>browse</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>35A0CD13-84A0-5E0F-B090-F1D1A99243A8</string>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>00D15675-62B9-5464-93F5-3AA88E0F20F7</string>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>DD65661F-0B5E-5741-9BE3-C472C03BEED1</string>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>connections</key>
+	<dict>
+		<key>B84C175E-9592-52B7-9AE0-242A75D7E373</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DE46A237-59A5-5D45-8212-7B05A2123D92</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>DE46A237-59A5-5D45-8212-7B05A2123D92</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9CED709F-36EB-5CCD-A2A5-81B6C2168AEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>9655D3A3-EBA7-5A90-93E7-454210F00B53</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9CED709F-36EB-5CCD-A2A5-81B6C2168AEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>9CED709F-36EB-5CCD-A2A5-81B6C2168AEE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0B48D109-D86B-5014-AF0A-2C43255D13AA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>00D15675-62B9-5464-93F5-3AA88E0F20F7</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy without pasting</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD65661F-0B5E-5741-9BE3-C472C03BEED1</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Copy name</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>0B48D109-D86B-5014-AF0A-2C43255D13AA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CE943DE9-DE58-5BFE-A130-79C858D1C887</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+				<key>sourceoutputuid</key>
+				<string>3CD2AFBF-D23C-550C-A480-CF4E46C5FA2B</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>35A0CD13-84A0-5E0F-B090-F1D1A99243A8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+	</dict>
+	<key>uidata</key>
+	<dict>
+		<key>B84C175E-9592-52B7-9AE0-242A75D7E373</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>120</integer>
+		</dict>
+		<key>DE46A237-59A5-5D45-8212-7B05A2123D92</key>
+		<dict>
+			<key>xpos</key>
+			<integer>200</integer>
+			<key>ypos</key>
+			<integer>120</integer>
+		</dict>
+		<key>9655D3A3-EBA7-5A90-93E7-454210F00B53</key>
+		<dict>
+			<key>xpos</key>
+			<integer>200</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
+		<key>9CED709F-36EB-5CCD-A2A5-81B6C2168AEE</key>
+		<dict>
+			<key>xpos</key>
+			<integer>380</integer>
+			<key>ypos</key>
+			<integer>120</integer>
+		</dict>
+		<key>0B48D109-D86B-5014-AF0A-2C43255D13AA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>540</integer>
+			<key>ypos</key>
+			<integer>20</integer>
+		</dict>
+		<key>CE943DE9-DE58-5BFE-A130-79C858D1C887</key>
+		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
+			<key>ypos</key>
+			<integer>410</integer>
+		</dict>
+		<key>35A0CD13-84A0-5E0F-B090-F1D1A99243A8</key>
+		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
+			<key>ypos</key>
+			<integer>20</integer>
+		</dict>
+		<key>00D15675-62B9-5464-93F5-3AA88E0F20F7</key>
+		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
+			<key>ypos</key>
+			<integer>150</integer>
+		</dict>
+		<key>DD65661F-0B5E-5741-9BE3-C472C03BEED1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>700</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>variable</key>
+			<string>EMOJI_KEYWORD</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>description</key>
+			<string>Opens the emoji grid.</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>emoji</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>TYPESAFE_API_KEY</string>
+			<key>label</key>
+			<string>TypeSafe API key</string>
+			<key>description</key>
+			<string>Optional. Enables Jev semantic search for queries like “I got promoted”. Keyword search works without it.</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>placeholder</key>
+				<string>ts_…</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>JEV_MODEL</string>
+			<key>label</key>
+			<string>Jev model</string>
+			<key>description</key>
+			<string>TypeSafe System One model used for semantic search.</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>jev-latest</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+		</dict>
+	</array>
+	<key>variables</key>
+	<dict/>
+	<key>variablesdontexport</key>
+	<array>
+		<string>TYPESAFE_API_KEY</string>
+	</array>
+	<key>webaddress</key>
+	<string></string>
+	<key>readme</key>
+	<string># Emoji
+
+A Raycast-style emoji picker for Alfred, built in Rust. It shows emoji in Alfred's native Grid View and adds semantic search powered by [TypeSafe Jev](https://docs.typesafe.ai).
+
+## Install
+
+Download the Apple Silicon or Intel build from the [releases page](https://github.com/ariestwn/alfred-workflows/releases) and open it. Requires Alfred 5.5+ with Powerpack.
+
+## Use
+
+- `emoji` → Return: browse all 1,923 emoji, four rows at a time. Select **Next** or **Previous** and press Return to change page.
+- `emoji happy` → Return: search by name or CLDR keyword (`happy`, `lol`, `money`). Works offline.
+- `emoji i got promoted`: also searches by meaning with Jev when an API key is set. Exact names come first, then Jev's ranking, then keyword matches.
+
+Alfred's Grid View has no row setting and grows with the number of items, so each page holds 30 emoji plus up to two page tiles. Search happens before the grid opens because Alfred's grid filter only sees the current page.
+- Return pastes the emoji into the front app. ⌘↩ copies without pasting. ⌥↩ copies the emoji's name.
+
+## Semantic search
+
+Set **TypeSafe API key** in Configure Workflow. Without one, `emoji &lt;query&gt;` uses keyword search only.
+
+Jev never generates emoji. It picks from the catalog in two steps, following TypeSafe's hierarchical classification pattern:
+
+1. Two parallel Choice questions over the 98 Unicode subgroups (for example, `face-hat` or `event`): one reads the query literally, the other as chat slang, innuendo, or meme usage. The top 3 subgroups from each are kept. The oversized `country-flag` subgroup is split in two so each question stays under the 255-option limit.
+2. Parallel Choice questions over the emoji in those subgroups. Each also has a "none" option.
+
+Each emoji's score is `sqrt(p_subgroup × p_emoji)`. Scores below 0.05 are dropped, and up to 24 results are kept. Results are cached per query in Alfred's workflow cache (`jev-v1/`), so repeating a query is instant and free.
+
+## Settings
+
+| Setting | Variable | Default |
+| --- | --- | --- |
+| Keyword | `EMOJI_KEYWORD` | `emoji` |
+| TypeSafe API key | `TYPESAFE_API_KEY` | none |
+| Jev model | `JEV_MODEL` | `jev-latest` |
+
+## Build
+
+```sh
+./scripts/cargo.sh test
+./build.sh
+```
+
+Data comes from Unicode `emoji-test.txt` and CLDR English annotations. Skin-tone variants are omitted. Run `python3 scripts/prepare_data.py` to regenerate `data/emoji.tsv`, and delete `workflow/icons` to re-render tiles with Apple Color Emoji.
+</string>
+</dict>
+</plist>

@@ -1,0 +1,7 @@
+/target/
+/dist/
+/.tools/
+/workflow/quickai
+__pycache__/
+.DS_Store
+

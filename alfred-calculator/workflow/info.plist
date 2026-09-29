@@ -1,0 +1,1026 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ariestwn.calculator-rust</string>
+	<key>name</key>
+	<string>Calculator Rust</string>
+	<key>description</key>
+	<string>Natural-language math, units, currencies, dates and time zones.</string>
+	<key>createdby</key>
+	<string>ariestwn</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>version</key>
+	<string>0.1.7</string>
+	<key>disabled</key>
+	<false/>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>uid</key>
+			<string>89EE2F58-DB40-5390-AD2A-D6887D166DC4</string>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>{var:CALC_KEYWORD}</string>
+				<key>title</key>
+				<string>Calculator</string>
+				<key>subtext</key>
+				<string>Math, units, currencies, dates and time zones</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Calculating…</string>
+				<key>script</key>
+				<string>exec ./calculator filter -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>322F32F0-F0AF-590D-A821-CE791FF4CA3A</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Calculate Selected Text</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>D3282B2D-EC37-5C55-B04C-4DD11512DB7D</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>calculator</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>AEEE554A-9AFC-5D04-814E-BEDBA459893D</string>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>{var:CALC_FX_KEYWORD}</string>
+				<key>title</key>
+				<string>Currency Converter</string>
+				<key>subtext</key>
+				<string>Type an amount, choose a source, then filter targets</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Calculating…</string>
+				<key>script</key>
+				<string>exec ./calculator currency -- "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>85DE121D-5A1C-5E85-A998-716426D29AFC</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Convert Currency</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>988A5A88-B5AE-56A4-A122-BFA2B5739401</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>currency</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>4384CB87-03CD-5A37-943D-2E04876A7F52</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>1</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>hotstring</key>
+				<string></string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>255E0964-7E1B-5298-9ADD-AF273847E0D3</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:CALC_ACTION}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>paste</string>
+						<key>outputlabel</key>
+						<string>Paste</string>
+						<key>uid</key>
+						<string>A541DD47-5C24-5145-8ED3-B20B942075DE</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:CALC_ACTION}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>url</string>
+						<key>outputlabel</key>
+						<string>Rate provider</string>
+						<key>uid</key>
+						<string>9C48F248-7589-5067-BAD7-0B6AD2A18165</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Copy</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>4FD12866-FB88-5D44-9794-FD97509B6A84</string>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>29B766C0-FD92-5505-8A40-5BD2B004D529</string>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>713536DF-DD2D-58C9-ACF8-EE7AD690B724</string>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>connections</key>
+	<dict>
+		<key>89EE2F58-DB40-5390-AD2A-D6887D166DC4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>255E0964-7E1B-5298-9ADD-AF273847E0D3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>322F32F0-F0AF-590D-A821-CE791FF4CA3A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>89EE2F58-DB40-5390-AD2A-D6887D166DC4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>D3282B2D-EC37-5C55-B04C-4DD11512DB7D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>89EE2F58-DB40-5390-AD2A-D6887D166DC4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>AEEE554A-9AFC-5D04-814E-BEDBA459893D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>255E0964-7E1B-5298-9ADD-AF273847E0D3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>85DE121D-5A1C-5E85-A998-716426D29AFC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AEEE554A-9AFC-5D04-814E-BEDBA459893D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>988A5A88-B5AE-56A4-A122-BFA2B5739401</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>AEEE554A-9AFC-5D04-814E-BEDBA459893D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>4384CB87-03CD-5A37-943D-2E04876A7F52</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>89EE2F58-DB40-5390-AD2A-D6887D166DC4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>255E0964-7E1B-5298-9ADD-AF273847E0D3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4FD12866-FB88-5D44-9794-FD97509B6A84</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>29B766C0-FD92-5505-8A40-5BD2B004D529</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+				<key>sourceoutputuid</key>
+				<string>A541DD47-5C24-5145-8ED3-B20B942075DE</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>713536DF-DD2D-58C9-ACF8-EE7AD690B724</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+				<key>sourceoutputuid</key>
+				<string>9C48F248-7589-5067-BAD7-0B6AD2A18165</string>
+			</dict>
+		</array>
+	</dict>
+	<key>uidata</key>
+	<dict>
+		<key>89EE2F58-DB40-5390-AD2A-D6887D166DC4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>322F32F0-F0AF-590D-A821-CE791FF4CA3A</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>D3282B2D-EC37-5C55-B04C-4DD11512DB7D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>160</integer>
+		</dict>
+		<key>AEEE554A-9AFC-5D04-814E-BEDBA459893D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>85DE121D-5A1C-5E85-A998-716426D29AFC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>988A5A88-B5AE-56A4-A122-BFA2B5739401</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>420</integer>
+		</dict>
+		<key>4384CB87-03CD-5A37-943D-2E04876A7F52</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>570</integer>
+		</dict>
+		<key>255E0964-7E1B-5298-9ADD-AF273847E0D3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>570</integer>
+			<key>ypos</key>
+			<integer>170</integer>
+		</dict>
+		<key>4FD12866-FB88-5D44-9794-FD97509B6A84</key>
+		<dict>
+			<key>xpos</key>
+			<integer>820</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>29B766C0-FD92-5505-8A40-5BD2B004D529</key>
+		<dict>
+			<key>xpos</key>
+			<integer>820</integer>
+			<key>ypos</key>
+			<integer>220</integer>
+		</dict>
+		<key>713536DF-DD2D-58C9-ACF8-EE7AD690B724</key>
+		<dict>
+			<key>xpos</key>
+			<integer>820</integer>
+			<key>ypos</key>
+			<integer>400</integer>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>variable</key>
+			<string>CALC_KEYWORD</string>
+			<key>label</key>
+			<string>Calculator keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>calc</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Type calc followed by an expression.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_FX_KEYWORD</string>
+			<key>label</key>
+			<string>Currency browser keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>fx</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Type fx 100, then choose source and target currencies.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_DECIMAL</string>
+			<key>label</key>
+			<string>Number format</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>auto</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Local (follow macOS)</string>
+						<string>auto</string>
+					</array>
+					<array>
+						<string>United States — 1,234.56</string>
+						<string>dot</string>
+					</array>
+					<array>
+						<string>Indonesia — 1.234,56</string>
+						<string>comma</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Choose decimal and thousands separators for numeric input, results, and Shift-Return rounded copy. Local follows the macOS decimal style. Command-Return raw copy always uses a dot and no grouping.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_GROUPING</string>
+			<key>label</key>
+			<string>Thousands separators</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Group digits in formatted answers</string>
+			</dict>
+			<key>description</key>
+			<string>Raw answers never contain grouping separators.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_PRECISION</string>
+			<key>label</key>
+			<string>Decimal precision</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>12</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>0 (no decimals)</string>
+						<string>0</string>
+					</array>
+					<array>
+						<string>1</string>
+						<string>1</string>
+					</array>
+					<array>
+						<string>2</string>
+						<string>2</string>
+					</array>
+					<array>
+						<string>3</string>
+						<string>3</string>
+					</array>
+					<array>
+						<string>4</string>
+						<string>4</string>
+					</array>
+					<array>
+						<string>5</string>
+						<string>5</string>
+					</array>
+					<array>
+						<string>6</string>
+						<string>6</string>
+					</array>
+					<array>
+						<string>7</string>
+						<string>7</string>
+					</array>
+					<array>
+						<string>8</string>
+						<string>8</string>
+					</array>
+					<array>
+						<string>9</string>
+						<string>9</string>
+					</array>
+					<array>
+						<string>10</string>
+						<string>10</string>
+					</array>
+					<array>
+						<string>11</string>
+						<string>11</string>
+					</array>
+					<array>
+						<string>12</string>
+						<string>12</string>
+					</array>
+					<array>
+						<string>13</string>
+						<string>13</string>
+					</array>
+					<array>
+						<string>14</string>
+						<string>14</string>
+					</array>
+					<array>
+						<string>15</string>
+						<string>15</string>
+					</array>
+					<array>
+						<string>16</string>
+						<string>16</string>
+					</array>
+					<array>
+						<string>17</string>
+						<string>17</string>
+					</array>
+					<array>
+						<string>18</string>
+						<string>18</string>
+					</array>
+					<array>
+						<string>19</string>
+						<string>19</string>
+					</array>
+					<array>
+						<string>20</string>
+						<string>20</string>
+					</array>
+					<array>
+						<string>21</string>
+						<string>21</string>
+					</array>
+					<array>
+						<string>22</string>
+						<string>22</string>
+					</array>
+					<array>
+						<string>23</string>
+						<string>23</string>
+					</array>
+					<array>
+						<string>24</string>
+						<string>24</string>
+					</array>
+					<array>
+						<string>25</string>
+						<string>25</string>
+					</array>
+					<array>
+						<string>26</string>
+						<string>26</string>
+					</array>
+					<array>
+						<string>27</string>
+						<string>27</string>
+					</array>
+					<array>
+						<string>28</string>
+						<string>28</string>
+					</array>
+					<array>
+						<string>29</string>
+						<string>29</string>
+					</array>
+					<array>
+						<string>30</string>
+						<string>30</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Maximum fractional digits (0–30). 0 rounds to a whole number; 2 shows up to two decimal places. Applies to formatted and raw numeric answers; integers retain their precision.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_TIMEZONE</string>
+			<key>label</key>
+			<string>Local timezone</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>auto</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>auto follows macOS. Override with an IANA zone such as Asia/Jakarta.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_WORK_HOURS</string>
+			<key>label</key>
+			<string>Hours per workday</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>8</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>4</string>
+						<string>4</string>
+					</array>
+					<array>
+						<string>6</string>
+						<string>6</string>
+					</array>
+					<array>
+						<string>7</string>
+						<string>7</string>
+					</array>
+					<array>
+						<string>8</string>
+						<string>8</string>
+					</array>
+					<array>
+						<string>9</string>
+						<string>9</string>
+					</array>
+					<array>
+						<string>10</string>
+						<string>10</string>
+					</array>
+					<array>
+						<string>12</string>
+						<string>12</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Work weeks are Monday–Friday. Public holidays are included in annual counts.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_PPI</string>
+			<key>label</key>
+			<string>Default pixels per inch</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>96</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Used for px conversions. Override in an expression with at 72 ppi.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_FAVORITES</string>
+			<key>label</key>
+			<string>Favorite currencies</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>IDR,USD,EUR,GBP,JPY,SGD,AUD,BTC,ETH</string>
+				<key>trim</key>
+				<true/>
+				<key>required</key>
+				<false/>
+			</dict>
+			<key>description</key>
+			<string>Comma-separated codes, shown first in the currency browser.</string>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>CALC_OFFLINE</string>
+			<key>label</key>
+			<string>Offline mode</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Use cached exchange rates only</string>
+			</dict>
+			<key>description</key>
+			<string>Math and dates always work offline. Cached rates show their provider and timestamp.</string>
+		</dict>
+	</array>
+	<key>variables</key>
+	<dict/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>webaddress</key>
+	<string></string>
+	<key>readme</key>
+	<string># Calculator Rust for Alfred
+
+Math, units, fiat and crypto conversions, dates, and time zones in an Alfred workflow. Inspired by the supplied Raycast Calculator guide and Vítor Galvão's Alfred Currency Converter workflow. The calculation engine and workflow logic run in Rust.
+
+## Install
+
+Download the Apple Silicon or Intel build from the [releases page](https://github.com/ariestwn/alfred-workflows/releases) and open it to import into Alfred. Requires Alfred 5 with Powerpack and macOS. Each build contains a native binary for one architecture only. Rust, Python, Node, and Raycast are not needed at runtime.
+
+Use `calc &lt;expression&gt;`. Type `calc` alone to see examples; Return on an example fills it into the input. Use `fx` for the currency browser. These are workflow keywords; Alfred's built-in root calculator remains separate. Alfred Script Filter rows display the answer and explanation as plain text, without Raycast's split expression/answer layout or syntax highlighting.
+
+| Input | What it does |
+| --- | --- |
+| `calc (20 + 5) * 4` | Arithmetic, parentheses, powers, factorials, constants |
+| `calc 52% of 900` | Percentage: 468 |
+| `calc 10000*10%` | Multiply by a rate: 1,000 |
+| `calc 1000000-10%` | Reduce the amount by 10%: 900,000 |
+| `calc 10000+10%` | Increase the amount by 10%: 11,000 |
+| `calc 10000/10%` | Divide by a rate: 100,000 |
+| `calc square root of 625` | Square root: 25 |
+| `calc 2 power 10` | Power: 1,024 |
+| `calc 10ft in m` | Unit conversion: 3.048 m |
+| `calc 100 usd in gbp` | Currency conversion |
+| `calc 0.1 BTC in IDR` | Crypto conversion |
+| `calc 20% off 80` | Discounted price: 64 |
+| `calc 15% tip on 42` | Tip: 6.3; a second row shows total 48.3 |
+| `calc ratio of 3 to 5` | Simplified ratio and decimal |
+| `calc USD1K` / `calc 10K` | Currency and numeric shorthand |
+| `calc $123 at 7% after 3 years` | Annual compound growth, no contributions or fees |
+| `calc 145 mins to timespan` | 2 hours 25 minutes |
+| `calc 55h in workdays` | 6.875 workdays at the default 8 hours/day |
+| `calc workhours in 2023` | 2,080 Monday–Friday workhours |
+| `calc 2 inches in px at 72 ppi` | 144 pixels |
+| `calc cot(1)` / `calc acos(1)` | Trigonometry; bare angles are radians |
+| `calc sin(90 degrees)` | Explicit degree input |
+| `calc 5pm ldn in sf` | London to San Francisco, with date and DST |
+| `calc time in tokyo` / `calc time in JFK` | Time in a city or airport alias |
+| `calc time in São Paulo` | Multi-word and accented city alias |
+| `calc time in balige` / `calc time in medan` | Current time in WIB |
+| `calc 5pm medan in tokyo` | 17:00 in Medan is 19:00 in Tokyo |
+| `calc 5pm balige in bali` | 17:00 in Balige is 18:00 in Bali |
+| `calc time diff Paris` / `calc diff Paris` | Offset difference relative to your local timezone |
+| `calc time in 4 hours in San Francisco` | Future time in a destination |
+| `calc monday in 3 weeks` | Upcoming weekday relative to a future date |
+| `calc days until 31 Mar` | Calendar-day countdown |
+| `calc days since 21 Sep 2025` | Calendar days from a past date to today |
+| `calc days since 21 Sep` | Days since the most recent 21 September, including today |
+| `calc day since 21 September to today` | Same calculation; singular `day` and `to today` are optional forms |
+| `calc days until end of quarter` | Days until the final date of this quarter |
+| `calc 2024-03-15T14:30:00Z` | ISO timestamp in your local timezone |
+| `calc August 5 + 5` | Add 5 calendar days |
+| `calc 3:45pm + 5` | Add 5 elapsed hours |
+| `calc now`, `today`, `tomorrow`, `yesterday`, `time` | Current/relative date or time |
+
+Math is powered by [fend-core](https://printfn.github.io/fend/documentation/), which also supports complex numbers, fractions, scientific units, logarithms, and bitwise operations. Additional reciprocal and inverse functions include `cot`, `csc`, `sec`, `coth`, `csch`, `sech`, `acot`, `acsc`, `asec`, `acoth`, `acsch`, and `asech`. The natural-language layer supports the forms documented here; it is not a general-language AI parser.
+
+## Copy and paste
+
+Result subtitles show shortcuts and only essential context, such as date ranges, timezones, rate status, and labels distinguishing multiple answers.
+
+Percent operators follow calculator conventions: `a + b%` and `a - b%` increase or decrease the preceding amount by that rate. Chained changes apply left to right (`100 - 10% - 5%` is 85.5). Multiplication and division use the rate as a fraction (`10%` is `0.1`). Normal operator precedence still applies: `100 + 10% * 2` is `100.2`. To subtract an absolute decimal, write `100 - 0.1`. `5 % 2` remains modulo, and explicit conversions such as `0.1 to %` still display percentages.
+
+- Return: copy the formatted answer, including its unit when present, and close Alfred.
+- Shift-Return: copy a numeric result rounded to the nearest whole number, preserving grouping and units (for example, `177,904.72955 IDR` becomes `177,905 IDR`). Hold Shift to preview the rounded copy value. Available in both `calc` and `fx`; dates, times, and multi-part durations keep their normal shortcuts.
+- Command-Return: copy the unformatted answer, without grouping or units and with a dot decimal separator. Dates/times use ISO format; a timespan uses seconds; a time difference uses hours.
+- Option-Return: paste the formatted answer into the active app.
+- Command-C: copy the formatted result. Command-L: show question and answer in Large Type.
+
+Two text Universal Actions and an unassigned calculator hotkey are included. Automatic paste uses Alfred's normal Accessibility permission. Invalid and incomplete expressions are not actionable.
+
+## Currency browser
+
+Type `fx 100` to choose a source. Type `fx 100 dol` to filter names, or `fx 100 USD` to see target conversions. Narrow targets with `fx 100 USD to GBP` or `fx 100 USD to rupiah`. `to`, `in`, and `as` are optional: `fx 100 USD GBP` also works. Return on a source suggestion completes it; Return on a result copies the answer.
+
+Favorites appear first, with IDR, USD, EUR, GBP, JPY, SGD, AUD, BTC, and ETH as defaults. The names list includes 166 fiat codes and 18 crypto codes; availability depends on the provider, and obsolete/unavailable codes do not produce invented rates.
+
+Fiat rates are provided by [ExchangeRate-API](https://www.exchangerate-api.com), which updates its open feed daily. Crypto rates come from [Coinbase](https://docs.cdp.coinbase.com/coinbase-app/track-apis/exchange-rates). No API keys are needed. Fiat data is refreshed after 12 hours; crypto after 5 minutes. Downloads happen in the background, and Alfred refreshes the results when data arrives. The workflow only requests fixed USD-based rate tables; it does not send your expression, amount, or history to either service.
+
+Results show the source and UTC rate timestamp. When refresh fails, previous rates stay usable and are labeled **Cached / stale**. If no usable cache exists, the workflow shows an unavailable/loading result instead of making up a conversion. Failed downloads wait a minute before retrying. Exchange rates are indicative; they do not include provider fees or buy/sell spreads. Cached data is stored under Alfred's workflow cache and is not bundled in exports.
+
+## Dates and conventions
+
+- The local timezone follows macOS by default, with an IANA-name override in Workflow Configuration. Named zones apply daylight-saving rules from the bundled timezone database.
+- City aliases include London/LDN, San Francisco/SF, New York/NYC/JFK, Tokyo/NRT/HND, São Paulo/GRU, Jakarta/CGK, Bali/DPS, Singapore/SIN, and others. Full IANA names such as `America/New_York` also work. Airport aliases are curated, not an exhaustive airport database.
+- Indonesian aliases include Balige, Medan, Toba/Danau Toba, Samosir, Parapat, Tarutung, Pematangsiantar/Siantar, and cities and provinces across WIB, WITA, and WIT. For example, `time in palangka raya`, `time in balikpapan`, `time in ambon`, and `diff medan` work. Names ignore case, repeated whitespace, and underscores. Lookups work offline using the curated list in `data/places.json`; it does not include every district or village. Unlisted places can use `WIB`, `WITA`, or `WIT` explicitly.
+- Indonesian timezone assignments follow [BMKG's regional time zones](https://www.bmkg.go.id/tanda-waktu). Sumatra and Java use `Asia/Jakarta`, western/central Kalimantan uses `Asia/Pontianak`, central Indonesia uses `Asia/Makassar`, and Maluku/Papua uses `Asia/Jayapura`. The result subtitle shows the timezone's IANA name, which may differ from the city requested.
+- `CST`, `IST`, and `BST` are treated as ambiguous. Use a city name. Explicit `PST`, `PDT`, `EST`, and `EDT` are fixed offsets; `PT` and `ET` follow US daylight saving. Fixed offsets such as `UTC+05:30` work.
+- A clock conversion uses today's date in the source zone. Include a date to schedule precisely: `2026-11-01 1:30am New York in London`. Repeated DST times return both possibilities; nonexistent local times produce an error.
+- `monday in 3 weeks` chooses the first Monday on or after today plus 3 weeks. A month/day without a year uses this year; a `days until` query uses its next occurrence when it has already passed. Include the year when it matters.
+- `days since DATE` counts elapsed calendar days in your configured local timezone, without counting the start date (today is 0, yesterday is 1). `day since DATE` and an optional `to today` suffix also work. A month/day without a year chooses its most recent occurrence on or before today; `29 Feb` finds the most recent leap day. Include a year to select an older occurrence, for example `days since 21 Sep 2025` or `days since 2025-09-21`. The result shows both dates. Explicit future dates are rejected; use `days until` for a countdown.
+- Work counts use Monday–Friday and the configured hours per day. They include public holidays and do not access your calendar. `55h in workdays` converts duration, rather than counting dates.
+- Date-only addition defaults to calendar days. Clock addition defaults to elapsed hours. All dates use the Gregorian calendar.
+
+## Configuration
+
+Workflow Configuration controls both keywords, number format, digit grouping, maximum fractional digits, local timezone, workday hours, default PPI, favorite currencies, and offline mode. Grouped inputs follow the chosen number format. Bare `10K`, `10M`, and `10B` mean thousand, million, and billion; use a space for a Kelvin unit (`10 K`). Calculations use a fresh context per query, so variables do not persist across searches.
+
+In Alfred Preferences → Workflows → Calculator Rust → Configure Workflow, choose **Number format**:
+
+- **Local (follow macOS)**: use the decimal style from your Mac's region settings.
+- **United States — 1,234.56**: comma for thousands, dot for decimals.
+- **Indonesia — 1.234,56**: dot for thousands, comma for decimals.
+
+The format applies to typed numbers, displayed results, normal copy/paste, and Shift-Return rounded copy. For example, `177904.72955 IDR` in United States format rounds to `177,905 IDR`; `177904,72955 IDR` in Indonesia format rounds to `177.905 IDR`. **Thousands separators** controls digit grouping separately, and **Decimal precision** controls how many decimal places are shown. Command-Return always copies a plain number with a dot decimal and no grouping. Number format does not change date language, timezone, or currency. Existing dot/comma preferences are preserved when updating.
+
+In Alfred Preferences → Workflows → Calculator Rust → Configure Workflow, set **Decimal precision** to any value from **0 to 30** (default: 12). Choose **0 (no decimals)** for whole numbers, **2** for up to two decimal places, or another count as needed. For example, `1234.567` displays `≈ 1,235` at 0, `≈ 1,234.57` at 2, and `1,234.567` at 3 when using dot decimals and grouping. Results are rounded, and exact short decimals are not padded (`1.5` stays `1.5` at 2). The setting also applies to raw numeric copy; it does not reduce integer precision or change date/time formats.
+
+## Build and test
+
+```sh
+./scripts/cargo.sh fetch --locked  # once, with network access
+./scripts/cargo.sh test --locked --offline
+./scripts/cargo.sh clippy --locked --offline --all-targets -- -D warnings
+./build.sh
+```
+
+Requires Rust, Xcode command line tools, and Python 3 for packaging. `scripts/cargo.sh` uses Cargo from PATH, falling back to the sibling `alfred-quickai/.tools` toolchain in this workspace. `build.sh` builds and signs the native binary, generates the icon if missing, and packages the workflow. Runtime network requests use macOS's `/usr/bin/curl` with HTTPS, size limits, and timeouts; all calculation, parsing, caching, and result generation run in Rust.
+
+Tests use deterministic dates and temporary rate fixtures, with network disabled. They cover the guide examples, large integers, decimal styles, units, currency completion, clipboard payloads, leap dates, and DST transitions. `scripts/verify_workflow.py` validates the archive and workflow graph and exercises the packaged executable. Expressions are limited to 2,048 bytes and 64 nested parentheses; math evaluation has a 400 ms interruption deadline.
+
+The supplied Raycast guide and existing Currency Converter workflow informed this implementation. Currency names are factual metadata; no existing workflow scripts or icons are bundled. Third-party library notices are included under `licenses/`.
+</string>
+</dict>
+</plist>

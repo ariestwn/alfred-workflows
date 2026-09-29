@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ariestwn.kraely-upload</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>59B8609B-A4B7-52AB-B4A3-0EB8451DA90F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>675B8B5D-70F7-56C2-BB53-4F5E0A740373</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>6B5BEB6D-88F6-594F-BAFB-67121BBCC9B8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>675B8B5D-70F7-56C2-BB53-4F5E0A740373</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>675B8B5D-70F7-56C2-BB53-4F5E0A740373</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9F2C307F-6F62-5365-A589-D4C7D32A10EB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>9F2C307F-6F62-5365-A589-D4C7D32A10EB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>67058A6E-9BF0-5D97-B18F-6DEBB327307B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+				<key>sourceoutputuid</key>
+				<string>3E54426B-CF4A-571B-A23A-6C4BED3F1515</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>749CA733-8F37-5FC0-B7AA-AD1486B15A42</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>67058A6E-9BF0-5D97-B18F-6DEBB327307B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>749CA733-8F37-5FC0-B7AA-AD1486B15A42</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>749CA733-8F37-5FC0-B7AA-AD1486B15A42</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BB5064D2-F1BC-5416-9BB8-260E2128A46C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BB5064D2-F1BC-5416-9BB8-260E2128A46C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>99ECC6ED-3B01-5AED-99CA-06456D782348</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+				<key>sourceoutputuid</key>
+				<string>0A90201C-E86B-5D85-ADCA-30C5792D5918</string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>ariestwn</string>
+	<key>description</key>
+	<string>Upload a selected file to your VPS over SSH and copy its absolute remote path.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Upload to Remote</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>uid</key>
+			<string>59B8609B-A4B7-52AB-B4A3-0EB8451DA90F</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<true/>
+				<key>acceptsmulti</key>
+				<false/>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<false/>
+				<key>name</key>
+				<string>Upload to Remote</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>6B5BEB6D-88F6-594F-BAFB-67121BBCC9B8</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>availableviaurlhandler</key>
+				<false/>
+				<key>triggerid</key>
+				<string>upload</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>675B8B5D-70F7-56C2-BB53-4F5E0A740373</string>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>exec ./kraely-upload --workflow -- "$@"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>9F2C307F-6F62-5365-A589-D4C7D32A10EB</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:kraely_ok}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>Uploaded</string>
+						<key>uid</key>
+						<string>3E54426B-CF4A-571B-A23A-6C4BED3F1515</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Upload failed</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>67058A6E-9BF0-5D97-B18F-6DEBB327307B</string>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>749CA733-8F37-5FC0-B7AA-AD1486B15A42</string>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>exec ./kraely-upload --feedback</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>BB5064D2-F1BC-5416-9BB8-260E2128A46C</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:kraely_native_notification}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>1</string>
+						<key>outputlabel</key>
+						<string>macOS notification</string>
+						<key>uid</key>
+						<string>0A90201C-E86B-5D85-ADCA-30C5792D5918</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Done</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>99ECC6ED-3B01-5AED-99CA-06456D782348</string>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerydifferent</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{var:kraely_message}</string>
+				<key>title</key>
+				<string>Upload to Remote</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Upload to Remote for Alfred
+
+A Rust port of the Raycast `screenshot-to-kraely` uploader. One Universal Action
+uploads the selected file to a VPS over SSH, then copies its absolute remote path.
+
+## Use
+
+1. Download the Apple Silicon or Intel build from the [releases page](https://github.com/ariestwn/alfred-workflows/releases) and open it in Alfred 5 with Powerpack.
+2. Open **Configure Workflow**, enter your **SSH host** (an alias from `~/.ssh/config` or `user@hostname`), and set the remote folder.
+3. Select one file in Finder (or select a file result in Alfred).
+4. Open Alfred Universal Actions and choose **Upload to Remote**.
+5. When the popup says **Remote path copied**, paste with ⌘V.
+
+For `example.png`, the default result is `/home/ubuntu/screenshot/example.png`.
+The copied value is the server's absolute filesystem path. It is not a public URL.
+This action accepts one regular file of any type, including screenshots and PDFs.
+
+## External Trigger
+
+Other workflows, scripts, and automations can start the same upload through the
+`upload` External Trigger. Pass one absolute file path as the argument; `~` is not
+expanded. The result is identical to the Universal Action, including the popup
+and clipboard copy.
+
+```sh
+osascript -e 'tell application id "com.runningwithcrayons.Alfred" to run trigger "upload" in workflow "com.ariestwn.kraely-upload" with argument "/Users/me/Desktop/example.png"'
+```
+
+From another Alfred workflow, add a **Call External Trigger** output with
+workflow `com.ariestwn.kraely-upload` and trigger `upload`. The `alfred://` URL
+handler is off, so web pages cannot start uploads of local files.
+
+## Configuration
+
+| Setting | Default |
+| --- | --- |
+| SSH host | Empty; required before the first upload |
+| Remote folder | `/home/ubuntu/screenshot/` |
+| Maximum file size | 20 MB |
+| Upload timeout | 60 seconds |
+| Status messages | Floating popup |
+
+The SSH alias must exist in `~/.ssh/config`, or use `user@hostname`. Configure
+ports, identity files, and jump hosts there. The remote folder must already exist
+and be writable. Files retain their names, including spaces and Unicode; an
+existing remote file with the same name is overwritten, as in the Raycast version.
+
+Requires macOS 14 or later with Apple's OpenSSH 9+ (SFTP-based `scp`), and SSH
+key authentication that works without a password prompt. Connect from Terminal
+first to verify the host key and make sure the key is available to your SSH agent:
+
+```sh
+ssh my-server
+```
+
+The workflow uses your existing SSH settings and agent. It does not store keys,
+passwords, or server credentials. Unknown or changed host keys fail verification.
+
+The compact native HUD shows upload progress and success/errors without taking
+focus. It keeps 15 pt vertical / 20 pt horizontal padding, transparent rounded
+corners, smooth width changes, and honors Reduce Motion. Status messages can also
+use macOS notifications or be disabled. Clipboard contents change only after
+`scp` reports success; failures and timeouts do not copy an empty or invalid path.
+Like `scp`, an interrupted upload may leave a partial remote file; retry to replace it.
+
+## Build and verify
+
+```sh
+./scripts/cargo.sh generate-lockfile --offline
+./scripts/cargo.sh test --locked
+./scripts/cargo.sh clippy --all-targets --locked -- -D warnings
+./build.sh
+python3 scripts/verify_workflow.py
+```
+
+Requires Rust 1.85+ and Xcode Command Line Tools to build. The Cargo wrapper uses
+system Cargo or a project-local toolchain, including one in the sibling
+`alfred-quickai` project. Alfred only needs the packaged native executable; no Rust,
+Node.js, Raycast, or Swift installation is needed at runtime.
+
+The native HUD smoke test shows temporary sample popups on a logged-in macOS
+desktop, without typing, writing the clipboard, or uploading anything:
+
+```sh
+./scripts/cargo.sh build --locked
+python3 scripts/smoke_upload.py
+python3 scripts/smoke_hud.py
+```
+
+CLI usage (prints the path to stdout; Alfred handles the clipboard):
+
+```sh
+KRAELY_HOST=my-server KRAELY_REMOTE_DIR=/home/ubuntu/screenshot/ \
+  ./workflow/kraely-upload -- /absolute/path/example.png
+```
+
+All workflow settings map to environment variables: `KRAELY_HOST`,
+`KRAELY_REMOTE_DIR`, `KRAELY_MAX_SIZE_MB`, `KRAELY_TIMEOUT`, and `KRAELY_FEEDBACK`
+(`hud`, `notification`, or `off`). Debug builds alone support `KRAELY_TEST_SCP`
+for mock integration tests; release builds always call `/usr/bin/scp`.
+`KRAELY_HOST` is required and accepts any SSH alias or `user@hostname`; there is
+no default host.
+
+The upload smoke test connects directly to Apple's local SFTP server using
+[`scp -D`](https://man.openbsd.org/scp.1#D), so it exercises the real protocol
+with temporary fixtures without contacting a VPS.
+
+`src/hud.rs` and `src/hud_mac.rs` reuse the native Rust/AppKit HUD from QuickAI.
+</string>
+	<key>uidata</key>
+	<dict>
+		<key>59B8609B-A4B7-52AB-B4A3-0EB8451DA90F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+		<key>6B5BEB6D-88F6-594F-BAFB-67121BBCC9B8</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>220</integer>
+		</dict>
+		<key>675B8B5D-70F7-56C2-BB53-4F5E0A740373</key>
+		<dict>
+			<key>xpos</key>
+			<integer>250</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+		<key>9F2C307F-6F62-5365-A589-D4C7D32A10EB</key>
+		<dict>
+			<key>xpos</key>
+			<integer>460</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+		<key>67058A6E-9BF0-5D97-B18F-6DEBB327307B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>680</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>749CA733-8F37-5FC0-B7AA-AD1486B15A42</key>
+		<dict>
+			<key>xpos</key>
+			<integer>900</integer>
+			<key>ypos</key>
+			<integer>160</integer>
+		</dict>
+		<key>BB5064D2-F1BC-5416-9BB8-260E2128A46C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1110</integer>
+			<key>ypos</key>
+			<integer>160</integer>
+		</dict>
+		<key>99ECC6ED-3B01-5AED-99CA-06456D782348</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1320</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>variable</key>
+			<string>KRAELY_HOST</string>
+			<key>label</key>
+			<string>SSH host</string>
+			<key>description</key>
+			<string>An alias from ~/.ssh/config or user@hostname. Uses your SSH config, keys, and agent.</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>placeholder</key>
+				<string>my-server</string>
+				<key>trim</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>KRAELY_REMOTE_DIR</string>
+			<key>label</key>
+			<string>Remote folder</string>
+			<key>description</key>
+			<string>Existing absolute folder on the VPS. Files keep their names; matching names are overwritten.</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>/home/ubuntu/screenshot/</string>
+				<key>required</key>
+				<false/>
+				<key>placeholder</key>
+				<string></string>
+				<key>trim</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>KRAELY_MAX_SIZE_MB</string>
+			<key>label</key>
+			<string>Max file size (MB)</string>
+			<key>description</key>
+			<string>Files larger than this limit are rejected before upload.</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>20</string>
+				<key>required</key>
+				<false/>
+				<key>placeholder</key>
+				<string></string>
+				<key>trim</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>KRAELY_TIMEOUT</string>
+			<key>label</key>
+			<string>Timeout (seconds)</string>
+			<key>description</key>
+			<string>Maximum upload duration, from 1 to 600 seconds.</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>60</string>
+				<key>required</key>
+				<false/>
+				<key>placeholder</key>
+				<string></string>
+				<key>trim</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>KRAELY_FEEDBACK</string>
+			<key>label</key>
+			<string>Status messages</string>
+			<key>description</key>
+			<string>Compact progress and completion popup without taking keyboard focus.</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>hud</string>
+				<key>required</key>
+				<false/>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Floating popup</string>
+						<string>hud</string>
+					</array>
+					<array>
+						<string>macOS notification</string>
+						<string>notification</string>
+					</array>
+					<array>
+						<string>Off</string>
+						<string>off</string>
+					</array>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>variables</key>
+	<dict/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>0.2.0</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>

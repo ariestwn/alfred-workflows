@@ -1,0 +1,5 @@
+/target/
+/workflow/calculator
+/dist/
+__pycache__/
+.DS_Store

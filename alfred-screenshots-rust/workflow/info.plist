@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.ariestwn.screenshots-rust</string>
+	<key>name</key>
+	<string>Screenshots Rust</string>
+	<key>description</key>
+	<string>Fast screenshot browsing with pages and cached previews.</string>
+	<key>createdby</key>
+	<string>ariestwn</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>version</key>
+	<string>0.1.0</string>
+	<key>disabled</key>
+	<false/>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>uid</key>
+			<string>F9D33DBF-1945-5F7F-BFBB-DCE124064A20</string>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>config</key>
+			<dict>
+				<key>keyword</key>
+				<string>{var:SHOTS_KEYWORD}</string>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>text</key>
+				<string>Browse Screenshots</string>
+				<key>subtext</key>
+				<string>Newest first · Type a filename or date to search the entire folder</string>
+				<key>withspace</key>
+				<true/>
+				<key>skipuniversalaction</key>
+				<true/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>B4752813-FFB8-5232-80B7-0AF604BF560C</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>SHOTS_PAGE</key>
+					<string>0</string>
+				</dict>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>33905527-95D5-569C-98AD-376044AE2C50</string>
+			<key>type</key>
+			<string>alfred.workflow.trigger.external</string>
+			<key>config</key>
+			<dict>
+				<key>triggerid</key>
+				<string>browse</string>
+				<key>availableviaurlhandler</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>9CDD059A-9C1D-5DDA-AE6E-C74817F870BE</string>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.grid</string>
+			<key>config</key>
+			<dict>
+				<key>columncount</key>
+				<integer>4</integer>
+				<key>filterable</key>
+				<false/>
+				<key>fixedorder</key>
+				<true/>
+				<key>imageaspect</key>
+				<integer>0</integer>
+				<key>inputfile</key>
+				<string>grid</string>
+				<key>inputtype</key>
+				<integer>1</integer>
+				<key>loadingtext</key>
+				<string>Loading screenshot previews…</string>
+				<key>showsubtitles</key>
+				<true/>
+				<key>showtitles</key>
+				<true/>
+				<key>subtitlesinfooter</key>
+				<true/>
+				<key>titlesinfooter</key>
+				<true/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>7F63C265-5DFA-56F4-B802-05148A004AFB</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>SHOTS_INTENT</key>
+					<string>preview</string>
+				</dict>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>5F95B559-91E1-58D1-BBB1-4717D8198BB8</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>SHOTS_INTENT</key>
+					<string>copy</string>
+				</dict>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>329B0F1E-1F7F-5DDA-AF70-AB1A4B73CB76</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>SHOTS_INTENT</key>
+					<string>reveal</string>
+				</dict>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>257E2691-D53A-5A57-9F18-C9EA95375BEE</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>SHOTS_INTENT</key>
+					<string>path</string>
+				</dict>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>57EE7061-FAA3-5140-A48A-05667DFC37B1</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:SHOTS_KIND}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>page</string>
+						<key>outputlabel</key>
+						<string>Change page</string>
+						<key>uid</key>
+						<string>DB36C7E4-CFC1-525D-96FE-6F0BAA8C80B5</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>File</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>CC0AFF2F-47F4-5AB3-9013-294E74071712</string>
+			<key>type</key>
+			<string>alfred.workflow.output.callexternaltrigger</string>
+			<key>config</key>
+			<dict>
+				<key>externaltriggerid</key>
+				<string>browse</string>
+				<key>passinputasargument</key>
+				<true/>
+				<key>passvariables</key>
+				<true/>
+				<key>workflowbundleid</key>
+				<string>self</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>67E1A61F-0674-582F-B00C-CE997A312563</string>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:SHOTS_INTENT}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>copy</string>
+						<key>outputlabel</key>
+						<string>Copy image</string>
+						<key>uid</key>
+						<string>37A62E95-0639-5E55-B2F5-EE660D3D76FC</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:SHOTS_INTENT}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>reveal</string>
+						<key>outputlabel</key>
+						<string>Reveal file</string>
+						<key>uid</key>
+						<string>575DADF9-6C21-5F3D-BDEA-20165C26CEAC</string>
+					</dict>
+					<dict>
+						<key>inputstring</key>
+						<string>{var:SHOTS_INTENT}</string>
+						<key>matchcasesensitive</key>
+						<true/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>path</string>
+						<key>outputlabel</key>
+						<string>Copy path</string>
+						<key>uid</key>
+						<string>87212488-C2D7-590B-80C5-636DDF357883</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>File</string>
+				<key>hideelse</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>09F44823-D46C-5512-B748-DEB023D27539</string>
+			<key>type</key>
+			<string>alfred.workflow.userinterface.image</string>
+			<key>config</key>
+			<dict>
+				<key>imageresizemode</key>
+				<integer>0</integer>
+				<key>stackview</key>
+				<true/>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>47E04DAB-D839-5AC9-837C-28016E505C73</string>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/macOS/clipboard.set.image.data</string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>B798DAB6-1F38-58A0-851F-2777BACC5DE3</string>
+			<key>type</key>
+			<string>alfred.workflow.action.revealfile</string>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string></string>
+			</dict>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>uid</key>
+			<string>91EF6D6A-5F79-59EA-9F1C-AE842B13A0A3</string>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<true/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>connections</key>
+	<dict>
+		<key>F9D33DBF-1945-5F7F-BFBB-DCE124064A20</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B4752813-FFB8-5232-80B7-0AF604BF560C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>B4752813-FFB8-5232-80B7-0AF604BF560C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9CDD059A-9C1D-5DDA-AE6E-C74817F870BE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>33905527-95D5-569C-98AD-376044AE2C50</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9CDD059A-9C1D-5DDA-AE6E-C74817F870BE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>9CDD059A-9C1D-5DDA-AE6E-C74817F870BE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7F63C265-5DFA-56F4-B802-05148A004AFB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string>Preview image</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5F95B559-91E1-58D1-BBB1-4717D8198BB8</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy image</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>329B0F1E-1F7F-5DDA-AF70-AB1A4B73CB76</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>257E2691-D53A-5A57-9F18-C9EA95375BEE</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Copy file path</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>7F63C265-5DFA-56F4-B802-05148A004AFB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57EE7061-FAA3-5140-A48A-05667DFC37B1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>5F95B559-91E1-58D1-BBB1-4717D8198BB8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57EE7061-FAA3-5140-A48A-05667DFC37B1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>329B0F1E-1F7F-5DDA-AF70-AB1A4B73CB76</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57EE7061-FAA3-5140-A48A-05667DFC37B1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>257E2691-D53A-5A57-9F18-C9EA95375BEE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>57EE7061-FAA3-5140-A48A-05667DFC37B1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>57EE7061-FAA3-5140-A48A-05667DFC37B1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CC0AFF2F-47F4-5AB3-9013-294E74071712</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+				<key>sourceoutputuid</key>
+				<string>DB36C7E4-CFC1-525D-96FE-6F0BAA8C80B5</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>67E1A61F-0674-582F-B00C-CE997A312563</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>67E1A61F-0674-582F-B00C-CE997A312563</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>09F44823-D46C-5512-B748-DEB023D27539</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>47E04DAB-D839-5AC9-837C-28016E505C73</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+				<key>sourceoutputuid</key>
+				<string>37A62E95-0639-5E55-B2F5-EE660D3D76FC</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>B798DAB6-1F38-58A0-851F-2777BACC5DE3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+				<key>sourceoutputuid</key>
+				<string>575DADF9-6C21-5F3D-BDEA-20165C26CEAC</string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>91EF6D6A-5F79-59EA-9F1C-AE842B13A0A3</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+				<key>sourceoutputuid</key>
+				<string>87212488-C2D7-590B-80C5-636DDF357883</string>
+			</dict>
+		</array>
+		<key>09F44823-D46C-5512-B748-DEB023D27539</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>47E04DAB-D839-5AC9-837C-28016E505C73</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy image</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>B798DAB6-1F38-58A0-851F-2777BACC5DE3</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Reveal in Finder</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>91EF6D6A-5F79-59EA-9F1C-AE842B13A0A3</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Copy file path</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>uidata</key>
+	<dict>
+		<key>F9D33DBF-1945-5F7F-BFBB-DCE124064A20</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>80</integer>
+		</dict>
+		<key>B4752813-FFB8-5232-80B7-0AF604BF560C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>240</integer>
+			<key>ypos</key>
+			<integer>80</integer>
+		</dict>
+		<key>33905527-95D5-569C-98AD-376044AE2C50</key>
+		<dict>
+			<key>xpos</key>
+			<integer>240</integer>
+			<key>ypos</key>
+			<integer>260</integer>
+		</dict>
+		<key>9CDD059A-9C1D-5DDA-AE6E-C74817F870BE</key>
+		<dict>
+			<key>xpos</key>
+			<integer>460</integer>
+			<key>ypos</key>
+			<integer>140</integer>
+		</dict>
+		<key>7F63C265-5DFA-56F4-B802-05148A004AFB</key>
+		<dict>
+			<key>xpos</key>
+			<integer>680</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>5F95B559-91E1-58D1-BBB1-4717D8198BB8</key>
+		<dict>
+			<key>xpos</key>
+			<integer>680</integer>
+			<key>ypos</key>
+			<integer>160</integer>
+		</dict>
+		<key>329B0F1E-1F7F-5DDA-AF70-AB1A4B73CB76</key>
+		<dict>
+			<key>xpos</key>
+			<integer>680</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
+		<key>257E2691-D53A-5A57-9F18-C9EA95375BEE</key>
+		<dict>
+			<key>xpos</key>
+			<integer>680</integer>
+			<key>ypos</key>
+			<integer>400</integer>
+		</dict>
+		<key>57EE7061-FAA3-5140-A48A-05667DFC37B1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>900</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+		<key>CC0AFF2F-47F4-5AB3-9013-294E74071712</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1120</integer>
+			<key>ypos</key>
+			<integer>40</integer>
+		</dict>
+		<key>67E1A61F-0674-582F-B00C-CE997A312563</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1120</integer>
+			<key>ypos</key>
+			<integer>220</integer>
+		</dict>
+		<key>09F44823-D46C-5512-B748-DEB023D27539</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1360</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+		<key>47E04DAB-D839-5AC9-837C-28016E505C73</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1360</integer>
+			<key>ypos</key>
+			<integer>240</integer>
+		</dict>
+		<key>B798DAB6-1F38-58A0-851F-2777BACC5DE3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1360</integer>
+			<key>ypos</key>
+			<integer>380</integer>
+		</dict>
+		<key>91EF6D6A-5F79-59EA-9F1C-AE842B13A0A3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>1360</integer>
+			<key>ypos</key>
+			<integer>520</integer>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>variable</key>
+			<string>SHOTS_KEYWORD</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>description</key>
+			<string>Search the entire folder before opening the gallery.</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>shots</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SHOTS_FOLDER</string>
+			<key>label</key>
+			<string>Screenshots folder</string>
+			<key>description</key>
+			<string>Images directly inside this folder are shown, newest modification first.</string>
+			<key>type</key>
+			<string>filepicker</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>~/Pictures/Screenshot</string>
+				<key>filtermode</key>
+				<integer>1</integer>
+				<key>required</key>
+				<true/>
+				<key>placeholder</key>
+				<string>Choose screenshots folder</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SHOTS_PAGE_SIZE</string>
+			<key>label</key>
+			<string>Images per page</string>
+			<key>description</key>
+			<string>Smaller pages open faster. Use Next / Previous tiles to browse all images.</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>48</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>12</string>
+						<string>12</string>
+					</array>
+					<array>
+						<string>24</string>
+						<string>24</string>
+					</array>
+					<array>
+						<string>48</string>
+						<string>48</string>
+					</array>
+					<array>
+						<string>72</string>
+						<string>72</string>
+					</array>
+					<array>
+						<string>120</string>
+						<string>120</string>
+					</array>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>variable</key>
+			<string>SHOTS_PIXELS</string>
+			<key>label</key>
+			<string>Preview size</string>
+			<key>description</key>
+			<string>Maximum thumbnail edge in pixels. Originals are used only when you preview or copy an image.</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>384</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Small (256 px)</string>
+						<string>256</string>
+					</array>
+					<array>
+						<string>Standard (384 px)</string>
+						<string>384</string>
+					</array>
+					<array>
+						<string>Large (512 px)</string>
+						<string>512</string>
+					</array>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>variables</key>
+	<dict/>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>webaddress</key>
+	<string></string>
+	<key>readme</key>
+	<string># Screenshots Rust
+
+A separate Alfred screenshot browser built in Rust, for folders containing thousands of screenshots. Inspired by the browsing controls in the installed Screenshots workflow. The original path supplied for this task was ChatGPT / DALL-E; the confirmed scope here is **browsing and selecting screenshots**.
+
+## Install
+
+Download the Apple Silicon or Intel build from the [releases page](https://github.com/ariestwn/alfred-workflows/releases) and import it into Alfred. Requires macOS and Alfred 5.5+ with Powerpack. Each build contains a native binary for one architecture only; Rust and Python are not needed to run it.
+
+In **Configure Workflow…**, choose your screenshot folder. The initial folder is `~/Pictures/Screenshot`, matching your existing Screenshots workflow. The keyword is `shots`, so the old workflow can remain installed.
+
+## Use
+
+- `shots` → Return: browse the newest screenshots.
+- `shots invoice` or `shots 2026-09`: search filenames and modification dates across the entire folder, then open the matching gallery. Multiple words may appear in any order.
+- Select **Next page →** / **← Previous page** and press Return to browse more images.
+- Return on an image opens Alfred's full-size image viewer. Escape returns to the gallery.
+- Command + Return copies the original image to the clipboard.
+- Option + Return reveals the original in Finder.
+- Control + Return copies its file path.
+
+The preview viewer also supports the copy/reveal shortcuts. Page navigation works with Return; modifiers on navigation tiles still change pages instead of passing them to a file action.
+
+Search is entered in the `shots` keyword, before opening the gallery. The gallery has no local filter field: Alfred's native Grid View only filters the items it has already loaded, which would hide matches on other pages. Reopen `shots &lt;query&gt;` to search the whole folder.
+
+## Why large folders stay responsive
+
+- Only the current page's images are sent to Alfred: **48 by default**.
+- Rust scans file metadata and retains only the newest entries needed for the requested page. The first page uses O(page size) retained file records, even when there are thousands of images.
+- macOS ImageIO generates small previews directly from the source, with **at most four decoders** active. No per-file `mdls`, `sips`, or other subprocesses are launched.
+- Previews are cached by source path, file size, modification/change timestamps, and preview size. Subsequent opens reuse them.
+- Alfred receives cached PNG previews instead of thousands of original full-resolution images. The original is loaded only when you preview/copy that image.
+- Search and paging rescan metadata, so added and removed files are reflected when opening a page. There is no dependency on Spotlight indexing or screenshot metadata tags.
+- Corrupt or unsupported images get a fallback icon and remain selectable. Failed previews are retried after five minutes or when the source changes.
+
+Images directly inside the selected folder are included: PNG, JPEG, WebP, HEIC/HEIF, TIFF, GIF, and BMP. Native decoding support depends on macOS. Animated images use their first frame. Subfolders, symlinks, hidden files, and videos are excluded. The source folder and its files are never modified.
+
+This workflow browses local files. It does not upload images, run OCR, or access AI providers. Clipboard actions use Alfred's native image clipboard task.
+
+## Settings
+
+| Setting | Variable | Default |
+| --- | --- | --- |
+| Keyword | `SHOTS_KEYWORD` | `shots` |
+| Screenshots folder | `SHOTS_FOLDER` | `~/Pictures/Screenshot` |
+| Images per page | `SHOTS_PAGE_SIZE` | `48` (12–120) |
+| Preview size | `SHOTS_PIXELS` | `384` pixels (longest edge) |
+
+Previews are stored in this workflow's Alfred cache under `thumbnails-v1`, with directory mode 0700. Once a day on use, cached previews older than 30 days are removed and the cache is pruned to 512 MB. It may grow beyond that size between cleanups. Removing Alfred's workflow cache simply regenerates previews next time.
+
+## Build and test
+
+```sh
+./scripts/cargo.sh test --locked
+./build.sh
+```
+
+Builds use system Cargo when available, otherwise the existing local toolchain in `../alfred-quickai/.tools`. The package contains a signed Rust executable, a short shell launcher, native Alfred workflow metadata, icons, and documentation. Python is used only to build/verify the package.
+
+Tests cover multi-page ordering and completeness, global search, Unicode and literal file paths, supported extensions, symlink exclusion, folder changes, corrupt images, native thumbnail generation, cache hits, and cache invalidation.
+
+Run performance checks with an isolated cache:
+
+```sh
+/usr/bin/python3 -B scripts/benchmark.py
+/usr/bin/python3 -B scripts/benchmark.py --folder ~/Pictures/Screenshot
+```
+
+The first command creates 25,000 temporary image paths (hard links to a generated 4K fixture). It verifies the first page, a warm cache, a deep page, and a search matching a file outside the first page. The second measures the real screenshot folder without changing source files. Benchmarks print only counts and timings.
+
+Measured on this Apple Silicon Mac, 13 September 2026:
+
+| Folder | First page, fresh previews | First page, cached previews | Last page |
+| --- | --- | --- | --- |
+| Actual screenshot folder: 2,896 images | 0.87 s | 0.18 s | 0.32 s |
+| Synthetic folder: 25,000 image paths | 1.91 s | 1.53 s | 1.87 s |
+
+These are CLI page-preparation times; Alfred's rendering time is excluded. Each page contained at most 48 image previews and the JSON stayed below 41 KB. All tested previews decoded successfully. The 25,000-file test reaches page 521 and verifies that global search finds a file beyond the first page. Cached preview generation itself took under 1 ms; large-folder warm times are mostly filesystem metadata scanning.
+
+To inspect JSON directly:
+
+```sh
+SHOTS_FOLDER=~/Pictures/Screenshot SHOTS_STATS=1 ./workflow/shots browse ''
+SHOTS_FOLDER=~/Pictures/Screenshot ./workflow/shots catalog '2026-09'
+```
+
+`SHOTS_STATS=1` emits counts and timing to stderr. `SHOTS_PAGE` is the zero-based page used internally. CLI arguments are passed literally, including spaces and shell characters.
+
+Reference: [Alfred Grid View](https://www.alfredapp.com/help/workflows/user-interface/grid/).
+</string>
+</dict>
+</plist>

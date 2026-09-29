@@ -1,0 +1,17 @@
+[package]
+name = "alfred-quickai"
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.85"
+description = "Three Alfred writing commands powered by Codex, Claude Code, or OpenCode"
+license = "MIT"
+
+[dependencies]
+libc = "0.2"
+serde_json = "1"
+tempfile = "3"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

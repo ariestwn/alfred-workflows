@@ -1,0 +1,21 @@
+# Build output
+target/
+dist/
+release/
+.tools/
+
+# Compiled binaries and generated assets, rebuilt by each build.sh
+/alfred-calculator/licenses/
+/alfred-emoji/workflow/emoji
+/alfred-emoji/workflow/icons/
+/alfred-screenshots-rust/workflow/shots
+
+# Local settings and secrets
+.env
+.env.*
+prefs.plist
+
+# macOS and Python
+.DS_Store
+__pycache__/
+*.pyc
