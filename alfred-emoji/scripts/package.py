@@ -75,7 +75,7 @@ def metadata():
              type="textfield", config=dict(default="jev-latest", required=False, trim=True)),
     ]
     return dict(bundleid=BUNDLE, name="Emoji", description="Emoji grid with keyword, binary embedding, and Jev semantic search.",
-                createdby="ariestwn", category="Productivity", version="0.1.0", disabled=False,
+                createdby="ariestwn", category="Productivity", version="0.2.0", disabled=False,
                 objects=objects, connections=connections, uidata=positions, userconfigurationconfig=fields,
                 variables={}, variablesdontexport=["TYPESAFE_API_KEY"], webaddress="",
                 readme=(ROOT / "README.md").read_text())
