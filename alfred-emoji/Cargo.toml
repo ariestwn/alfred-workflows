@@ -3,11 +3,15 @@ name = "alfred-emoji"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.85"
-description = "Alfred emoji grid with keyword search and Jev semantic search"
+description = "Alfred emoji grid with keyword, binary embedding, and Jev semantic search"
 license = "MIT"
 
 [dependencies]
+candle-core = "0.11.0"
+candle-nn = "0.11.0"
+candle-transformers = "0.11.0"
 serde_json = "1"
+unicode-normalization = "0.1.25"
 ureq = { version = "2", features = ["json"] }
 
 [dev-dependencies]

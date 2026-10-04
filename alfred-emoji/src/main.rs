@@ -1,4 +1,5 @@
 mod catalog;
+mod embed;
 mod jev;
 #[cfg(test)]
 mod tests;
@@ -6,7 +7,10 @@ mod tests;
 use catalog::{Catalog, Emoji};
 use jev::Jev;
 use serde_json::{json, Value};
-use std::{env, fs, path::PathBuf};
+use std::{
+    env, fs,
+    path::{Path, PathBuf},
+};
 
 type Result<T> = std::result::Result<T, String>;
 const BUNDLE: &str = "com.ariestwn.emoji";
@@ -67,7 +71,12 @@ fn semantic(catalog: &Catalog, query: &str, jev: &Jev) -> Result<Vec<usize>> {
     Ok(found)
 }
 
-/// Exact name hits first, then Jev's ranking, then remaining keyword hits.
+fn model_dir() -> Result<PathBuf> {
+    let exe = env::current_exe().map_err(|e| e.to_string())?;
+    Ok(exe.parent().unwrap_or(Path::new(".")).join("model"))
+}
+
+/// Exact name hits first, then the semantic ranking, then remaining keyword hits.
 pub fn merge(keyword: &[(usize, bool)], ai: &[usize]) -> Vec<usize> {
     let mut out: Vec<usize> = keyword.iter().filter(|k| k.1).map(|k| k.0).collect();
     for &i in ai.iter().chain(keyword.iter().map(|k| &k.0)) {
@@ -84,22 +93,28 @@ fn results(catalog: &Catalog, query: &str) -> Vec<Value> {
         return catalog.emoji.iter().map(item).collect();
     }
     let keyword = catalog.keyword_search(query);
+    let engine = env::var("SEARCH_ENGINE").unwrap_or_default();
     let key = env::var("TYPESAFE_API_KEY").unwrap_or_default().trim().to_string();
-    let mut problem = None;
-    let ai = if key.is_empty() {
-        Vec::new()
-    } else {
-        let model = env::var("JEV_MODEL").ok().filter(|m| !m.trim().is_empty()).unwrap_or("jev-latest".into());
-        semantic(catalog, query, &Jev { key, model }).unwrap_or_else(|e| {
-            problem = Some(e);
-            Vec::new()
-        })
+    let found = match engine.trim() {
+        "keyword" => Ok(Vec::new()),
+        "jev" if key.is_empty() => Ok(Vec::new()),
+        "jev" => {
+            let model = env::var("JEV_MODEL").ok().filter(|m| !m.trim().is_empty()).unwrap_or("jev-latest".into());
+            semantic(catalog, query, &Jev { key: key.clone(), model })
+        }
+        _ => model_dir()
+            .and_then(|dir| embed::search(catalog, &dir, query, AI_LIMIT))
+            .map(|hits| hits.into_iter().map(|h| h.0).collect()),
+    };
+    let (ai, problem) = match found {
+        Ok(ai) => (ai, None),
+        Err(e) => (Vec::new(), Some(e)),
     };
     let mut items: Vec<Value> = merge(&keyword, &ai).into_iter().map(|i| item(&catalog.emoji[i])).collect();
     if let Some(e) = problem {
-        items.push(notice("AI search unavailable", &e));
+        items.push(notice("Semantic search unavailable", &e));
     } else if items.is_empty() {
-        let hint = if env::var("TYPESAFE_API_KEY").unwrap_or_default().trim().is_empty() {
+        let hint = if engine.trim() == "jev" && key.is_empty() {
             "Add a TypeSafe API key in Configure Workflow to search by meaning"
         } else {
             "Try describing it differently"
@@ -139,9 +154,18 @@ pub fn paginate(items: Vec<Value>, page: usize, query: &str) -> Vec<Value> {
 
 fn main() {
     let args: Vec<String> = env::args().skip(1).collect();
+    let catalog = Catalog::load();
+    if let [flag, src, out] = args.as_slice() {
+        if flag == "--build-model" {
+            if let Err(e) = embed::build(&catalog, Path::new(src), Path::new(out)) {
+                eprintln!("{e}");
+                std::process::exit(1);
+            }
+            return;
+        }
+    }
     let query = args.join(" ");
     let page = env::var("EMOJI_PAGE").ok().and_then(|p| p.parse().ok()).unwrap_or(0);
-    let catalog = Catalog::load();
     let items = paginate(results(&catalog, &query), page, query.trim());
     println!("{}", json!({ "items": items }));
 }

@@ -6,7 +6,8 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
 BUNDLE = "com.ariestwn.emoji"
-FILES = ["emoji", "grid", "info.plist", "icon.png", "previous.png", "next.png"]
+FILES = ["emoji", "grid", "info.plist", "icon.png", "previous.png", "next.png",
+         "model/config.json", "model/vocab.txt", "model/model.safetensors", "model/emoji.bin"]
 OUT = ROOT / "dist/Emoji.alfredworkflow"
 
 
@@ -60,13 +61,20 @@ def metadata():
     fields = [
         dict(variable="EMOJI_KEYWORD", label="Keyword", description="Opens the emoji grid.",
              type="textfield", config=dict(default="emoji", required=False, trim=True)),
+        dict(variable="SEARCH_ENGINE", label="Semantic search",
+             description="Searches by meaning alongside keywords. Binary embeddings run offline with bge-small; Jev needs a TypeSafe API key.",
+             type="popupbutton", config=dict(default="embedding", pairs=[
+                 ["Binary embeddings (offline)", "embedding"],
+                 ["Jev (TypeSafe)", "jev"],
+                 ["Off (keyword only)", "keyword"],
+             ])),
         dict(variable="TYPESAFE_API_KEY", label="TypeSafe API key",
-             description="Optional. Enables Jev semantic search for queries like “I got promoted”. Keyword search works without it.",
+             description="Required when Semantic search is set to Jev.",
              type="textfield", config=dict(default="", required=False, trim=True, placeholder="ts_…")),
         dict(variable="JEV_MODEL", label="Jev model", description="TypeSafe System One model used for semantic search.",
              type="textfield", config=dict(default="jev-latest", required=False, trim=True)),
     ]
-    return dict(bundleid=BUNDLE, name="Emoji", description="Emoji grid with keyword and Jev semantic search.",
+    return dict(bundleid=BUNDLE, name="Emoji", description="Emoji grid with keyword, binary embedding, and Jev semantic search.",
                 createdby="ariestwn", category="Productivity", version="0.1.0", disabled=False,
                 objects=objects, connections=connections, uidata=positions, userconfigurationconfig=fields,
                 variables={}, variablesdontexport=["TYPESAFE_API_KEY"], webaddress="",

@@ -1,6 +1,6 @@
 use crate::catalog::Catalog;
 use crate::jev::{emoji_question, leaves, rank, subgroup_question};
-use crate::{merge, paginate};
+use crate::{embed, merge, paginate};
 use serde_json::json;
 
 #[test]
@@ -29,6 +29,7 @@ fn catalog_has_base_emoji_without_skin_tones() {
     assert!(c.emoji.iter().all(|e| !e.glyph.chars().any(|ch| ('\u{1F3FB}'..='\u{1F3FF}').contains(&ch))));
     assert_eq!(c.emoji[0].glyph, "😀");
     assert_eq!(c.emoji[0].icon(), "icons/1f600.png");
+    assert!(c.emoji.iter().all(|e| !e.description.is_empty()));
 }
 
 #[test]
@@ -77,6 +78,46 @@ fn rank_uses_geometric_mean_and_skips_none() {
     let ranked = rank(&c, &beams, &picks, 10, 0.05);
     assert_eq!(ranked.iter().map(|r| r.0).collect::<Vec<_>>(), vec![index(&c, "🥳"), index(&c, "🎉")]);
     assert!((ranked[0].1 - (0.6f64 * 0.9).sqrt()).abs() < 1e-9);
+}
+
+#[test]
+fn basic_tokens_split_punctuation_and_strip_accents() {
+    assert_eq!(embed::basic_tokens("It's Piñata-time!"), ["it", "'", "s", "pinata", "-", "time", "!"]);
+}
+
+#[test]
+fn quantize_keeps_sign_bits() {
+    let mut v = vec![-1.0f32; embed::DIMS];
+    v[0] = 0.5;
+    v[65] = 0.1;
+    let bits = embed::quantize(&v);
+    assert_eq!(bits[0], 1);
+    assert_eq!(bits[1], 2);
+    assert_eq!(embed::hamming(&bits, &embed::quantize(&vec![-1.0; embed::DIMS])), 2);
+}
+
+#[test]
+fn rank_prefers_nearest_bits() {
+    let up = vec![1.0f32; embed::DIMS];
+    let mut half = up.clone();
+    half[..embed::DIMS / 2].fill(-1.0);
+    let index = vec![embed::quantize(&half), embed::quantize(&up.iter().map(|x| -x).collect::<Vec<_>>()), embed::quantize(&up)];
+    let ranked = embed::rank(&index, &up, 2);
+    assert_eq!(ranked.iter().map(|r| r.0).collect::<Vec<_>>(), vec![2, 0]);
+}
+
+#[test]
+fn bundled_model_finds_pizza() {
+    let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("workflow/model");
+    if !dir.join("emoji.bin").exists() {
+        eprintln!("skipping: run ./build.sh to create workflow/model");
+        return;
+    }
+    let c = Catalog::load();
+    let hits = embed::search(&c, &dir, "pizza night", 5).unwrap();
+    assert!(hits.iter().any(|h| h.0 == index(&c, "🍕")));
+    let hits = embed::search(&c, &dir, "penis", 5).unwrap();
+    assert!(hits.iter().any(|h| h.0 == index(&c, "🍆")));
 }
 
 #[test]

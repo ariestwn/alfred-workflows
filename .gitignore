@@ -8,6 +8,7 @@ release/
 /alfred-calculator/licenses/
 /alfred-emoji/workflow/emoji
 /alfred-emoji/workflow/icons/
+/alfred-emoji/workflow/model/
 /alfred-screenshots-rust/workflow/shots
 
 # Local settings and secrets

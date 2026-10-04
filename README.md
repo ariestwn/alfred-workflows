@@ -81,7 +81,7 @@ Natural-language math, unit and currency conversion, dates, and time zones. Sour
 
 ### Emoji
 
-A Raycast-style emoji picker in Alfred's Grid View, with offline keyword search and optional semantic search by meaning through [TypeSafe Jev](https://docs.typesafe.ai). Source: [`alfred-emoji`](alfred-emoji).
+A Raycast-style emoji picker in Alfred's Grid View, with keyword search plus semantic search by meaning. Semantic search runs offline by default with a bundled bge-small model and a binary embedding index, or through [TypeSafe Jev](https://docs.typesafe.ai). Source: [`alfred-emoji`](alfred-emoji).
 
 ![Emoji grid showing results for "happy"](docs/screenshots/emoji.png)
 
@@ -89,10 +89,11 @@ A Raycast-style emoji picker in Alfred's Grid View, with offline keyword search 
 | --- | --- |
 | `emoji` | Browse all 1,923 emoji, a page at a time |
 | `emoji happy` | Search names and CLDR keywords (works offline) |
-| `emoji i got promoted` | Also search by meaning, when a TypeSafe API key is set |
+| `emoji pizza night` | Also search by meaning (offline embeddings by default) |
 | ↩ / ⌘↩ / ⌥↩ | Paste the emoji / copy it / copy its name |
 
-- The optional **TypeSafe API key** is entered in Configure Workflow. It is marked "don't export", so it never leaves your Mac inside an exported workflow.
+- Choose **Semantic search** in Configure Workflow: binary embeddings (offline, no key), Jev, or off.
+- The **TypeSafe API key** is only needed for Jev. It is marked "don't export", so it never leaves your Mac inside an exported workflow.
 - Requires Alfred 5.5+.
 
 ### Handy Rust

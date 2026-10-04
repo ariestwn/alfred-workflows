@@ -1,4 +1,7 @@
+use std::collections::HashMap;
+
 const DATA: &str = include_str!("../data/emoji.tsv");
+const DESCRIPTIONS: &str = include_str!("../data/descriptions.tsv");
 
 pub struct Emoji {
     pub glyph: &'static str,
@@ -6,6 +9,8 @@ pub struct Emoji {
     pub group: &'static str,
     pub subgroup: &'static str,
     pub keywords: Vec<&'static str>,
+    /// How people use the emoji in chat, including slang; embedded for semantic search.
+    pub description: &'static str,
 }
 
 impl Emoji {
@@ -39,18 +44,22 @@ pub struct Catalog {
 
 impl Catalog {
     pub fn load() -> Self {
+        let descriptions: HashMap<&str, &str> =
+            DESCRIPTIONS.lines().filter_map(|l| l.split_once('\t')).collect();
         let emoji = DATA
             .lines()
             .filter(|l| !l.is_empty())
             .map(|line| {
                 let mut f = line.split('\t');
                 let mut next = || f.next().unwrap_or("");
+                let glyph = next();
                 Emoji {
-                    glyph: next(),
+                    glyph,
                     name: next(),
                     group: next(),
                     subgroup: next(),
                     keywords: next().split('|').filter(|k| !k.is_empty()).collect(),
+                    description: descriptions.get(glyph).copied().unwrap_or(""),
                 }
             })
             .collect();
