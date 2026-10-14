@@ -140,6 +140,8 @@ Bit-perfect Apple Music: a background helper detects each track's real sample ra
 
 Play iPhone audio over USB through the Mac's default output, with a Rust controller and native Swift helpers adapted from the local Raycast extension. Source and setup: [`alfred-iphone-stream`](alfred-iphone-stream/README.md). This workflow is currently built locally; no published release yet.
 
+![iPhone Stream controls showing stream status, volume, and Audio MIDI actions in Alfred](docs/screenshots/iphone-stream.png)
+
 | Keyword | Action |
 | --- | --- |
 | `iphone [query]` | Browse stream controls and see current status/volume |
@@ -263,6 +265,8 @@ The archive is written to that workflow's `dist/` folder. Each workflow's own RE
 (cd alfred-quickai && ./scripts/cargo.sh build --locked)
 (cd alfred-kraely-upload && ./scripts/cargo.sh build --locked)
 python3 scripts/screenshots/make.py
+# Regenerate only iPhone Stream:
+python3 scripts/screenshots/make.py --only iphone-stream
 ```
 
 The script runs each workflow's built binary against temporary demo data: a fake calendar, a folder of generated images, a placeholder app, and a sample chat. It then captures the output with headless Chromium (Playwright's `chrome-headless-shell` if installed, otherwise Google Chrome) into `docs/screenshots/`. The QuickAI and Upload to Remote status popups are rendered by their debug builds and briefly appear on screen while it runs.

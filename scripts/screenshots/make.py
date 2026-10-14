@@ -10,6 +10,7 @@ Run ./scripts/release.sh (or each project's build.sh) first. The QuickAI and
 Upload to Remote status popups are rendered by their debug builds
 (./scripts/cargo.sh build) and briefly appear on screen while this runs.
 """
+import argparse
 import datetime
 import html
 import json
@@ -268,6 +269,16 @@ def handy():
     list_shot("handy", "handy ", items[:7], base)
 
 
+def iphone_stream():
+    base = ROOT / "alfred-iphone-stream/workflow"
+    data = TMP / "iphone-stream/data"
+    data.mkdir(parents=True)
+    (data / "state.json").write_text(json.dumps(dict(volume=0.7)))
+    items = run(["./iphone-stream", "filter", "--", ""], base,
+                IPHONE_STREAM_STATE_DIR=str(data))["items"]
+    list_shot("iphone-stream", "iphone ", items, base)
+
+
 def upload():
     base = ROOT / "alfred-kraely-upload/workflow"
     desktop = TMP / "Desktop"
@@ -389,15 +400,24 @@ def ai_chat():
 
 
 def main():
-    (TMP / "shots").mkdir()
-    start = time.time() - 3600
-    for i, (title, accent) in enumerate(MOCKUPS):
-        path = TMP / "shots" / ("Screenshot 2026-09-%02d at %02d.%02d.00.png" % (28 - i // 4, 9 + i, (i * 7) % 60))
-        mockup(title, accent, path)
-        os.utime(path, (start - i * 5400, start - i * 5400))
-    for shot in [calculator, emoji, handy, schedule, screenshots, uninstaller, ai_chat, quickai, upload]:
-        shot()
-    shutil.rmtree(TMP, ignore_errors=True)
+    shots = [calculator, emoji, handy, iphone_stream, schedule, screenshots, uninstaller, ai_chat, quickai, upload]
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--only", choices=[shot.__name__.replace("_", "-") for shot in shots],
+                        help="Regenerate just one workflow screenshot.")
+    args = parser.parse_args()
+    selected = [shot for shot in shots if not args.only or shot.__name__.replace("_", "-") == args.only]
+    try:
+        if screenshots in selected or upload in selected:
+            (TMP / "shots").mkdir()
+            start = time.time() - 3600
+            for i, (title, accent) in enumerate(MOCKUPS):
+                path = TMP / "shots" / ("Screenshot 2026-09-%02d at %02d.%02d.00.png" % (28 - i // 4, 9 + i, (i * 7) % 60))
+                mockup(title, accent, path)
+                os.utime(path, (start - i * 5400, start - i * 5400))
+        for shot in selected:
+            shot()
+    finally:
+        shutil.rmtree(TMP, ignore_errors=True)
 
 
 if __name__ == "__main__":
