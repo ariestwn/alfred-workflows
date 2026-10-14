@@ -9,7 +9,7 @@ Memerlukan macOS 14+, Alfred 5 dengan Powerpack, dan iPhone yang terhubung melal
 1. Impor `dist/iPhone Stream.alfredworkflow` ke Alfred.
 2. Hubungkan iPhone, buka kunci, lalu pilih **Trust This Computer** bila diminta.
 3. Jalankan `imidi` untuk meminta Audio MIDI Mode aktif. Tunggu perangkat terhubung ulang. Alternatif: buka **Audio MIDI Setup**, pilih iPhone, lalu klik **Enable**.
-4. Jalankan `istream`. Pada penggunaan pertama, izinkan akses Microphone. Jika ditolak, periksa **System Settings → Privacy & Security → Microphone** untuk Alfred atau iPhone Stream Helper, lalu coba lagi.
+4. Jalankan `istream`. Pada penggunaan pertama, izinkan akses Microphone untuk **iPhone Stream Helper**. Jika ditolak, periksa **System Settings → Privacy & Security → Microphone**, lalu coba lagi.
 
 ## Perintah
 
@@ -49,7 +49,9 @@ Build menghasilkan satu arsip untuk arsitektur yang dipilih; ketiga executable m
 
 Kode dasar dan pengendali workflow menggunakan Rust; dua helper akses platform masih Swift. Belum merupakan port seluruh helper ke Rust.
 
-Data berada di `alfred_workflow_data`, dengan fallback `~/Library/Application Support/Alfred/Workflow Data/com.ariestwn.iphone-stream`. Berisi `state.json`, `daemon.pid`, `daemon.log`, dan `command.lock`. Direktori ini terpisah dari ekstensi Raycast. Jangan menjalankan kedua stream audio sekaligus.
+Data berada di `alfred_workflow_data`, dengan fallback `~/Library/Application Support/Alfred/Workflow Data/com.ariestwn.iphone-stream`. Berisi `state.json`, `daemon.pid`, `daemon.log`, `command.lock`, `startup.pid`, dan `startup.json`. Direktori ini terpisah dari ekstensi Raycast. Jangan menjalankan kedua stream audio sekaligus.
+
+Helper diluncurkan sebagai aplikasi melalui LaunchServices (`open`), sehingga permintaan izin Microphone milik iPhone Stream Helper sendiri. Jangan menjalankan executable helper langsung dari Alfred: macOS dapat mengaitkan akses Microphone ke Alfred dan menghentikan helper karena metadata izin aplikasi asal tidak tersedia. Startup memiliki laporan kegagalan dan identitas percobaan; hasil peluncuran lama tidak dianggap sebagai hasil terbaru.
 
 Untuk pengembangan, `IPHONE_STREAM_STATE_DIR` dapat menunjuk direktori uji. CLI mendukung `filter`, `status`, `start`, `stop`, serta empat perintah di atas. Jalankan CLI dari direktori workflow agar icon relatif dapat ditemukan oleh Alfred.
 

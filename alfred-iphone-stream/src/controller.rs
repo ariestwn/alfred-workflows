@@ -1,7 +1,7 @@
 use crate::state;
 use std::{
     fs::{self, File, OpenOptions},
-    os::{fd::AsRawFd, unix::process::CommandExt},
+    os::fd::AsRawFd,
     path::PathBuf,
     process::{Command, Stdio},
     thread,
@@ -70,7 +70,11 @@ impl Controller {
     }
 
     pub fn running_pid(&self) -> Option<i32> {
-        let pid = fs::read_to_string(self.dir.join("daemon.pid"))
+        self.owned_pid("daemon.pid")
+    }
+
+    fn owned_pid(&self, file: &str) -> Option<i32> {
+        let pid = fs::read_to_string(self.dir.join(file))
             .ok()?
             .trim()
             .parse::<i32>()
@@ -94,35 +98,56 @@ impl Controller {
         let _ = fs::remove_file(self.dir.join("daemon.pid"));
         // Each start has a fresh diagnostic log, so an older error isn't shown.
         let log = File::create(self.dir.join("daemon.log")).map_err(|e| e.to_string())?;
-        let mut command = Command::new(&self.daemon);
+        let launch_id = format!(
+            "{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .map_err(|e| e.to_string())?
+                .as_nanos()
+        );
+        let _ = fs::remove_file(self.dir.join("startup.json"));
+        let _ = fs::remove_file(self.dir.join("startup.pid"));
+        // LaunchServices makes the app responsible for its own microphone access.
+        // Directly spawning its executable incorrectly attributes access to Alfred.
+        let mut command = self.launch_command(&launch_id)?;
         command
-            .env("IPHONE_STREAM_STATE_DIR", &self.dir)
             .stdin(Stdio::null())
             .stdout(log.try_clone().map_err(|e| e.to_string())?)
             .stderr(log);
-        unsafe {
-            command.pre_exec(|| {
-                if libc::setsid() < 0 {
-                    return Err(std::io::Error::last_os_error());
-                }
-                Ok(())
-            });
-        }
         let mut child = command.spawn().map_err(|e| e.to_string())?;
         let deadline = Instant::now() + Duration::from_secs(30);
         loop {
-            if self.running_pid() == Some(child.id() as i32) {
+            if self.running_pid().is_some() {
                 return Ok("iPhone Stream aktif".into());
             }
-            if child.try_wait().map_err(|e| e.to_string())?.is_some() {
-                let log = fs::read_to_string(self.dir.join("daemon.log")).unwrap_or_default();
-                return Err(log
-                    .lines()
-                    .last()
-                    .unwrap_or("Helper berhenti sebelum audio aktif.")
-                    .to_string());
+            if let Some(status) = child.try_wait().map_err(|e| e.to_string())? {
+                if !status.success() {
+                    let log = fs::read_to_string(self.dir.join("daemon.log")).unwrap_or_default();
+                    return Err(format!(
+                        "Aplikasi helper tidak dapat dibuka ({status}): {}",
+                        log.trim()
+                    ));
+                }
+            }
+            if let Some(report) = self.startup_report(&launch_id) {
+                if report["phase"] == "failed" {
+                    return Err(report["message"]
+                        .as_str()
+                        .unwrap_or("Helper gagal memulai audio.")
+                        .into());
+                }
+                if report["phase"] == "starting" && self.owned_pid("startup.pid").is_none() {
+                    let log = fs::read_to_string(self.dir.join("daemon.log")).unwrap_or_default();
+                    return Err(format!("Helper berhenti saat startup: {}. Periksa log dan izin Microphone untuk iPhone Stream Helper.", log.lines().last().unwrap_or("tanpa pesan kesalahan")));
+                }
             }
             if Instant::now() >= deadline {
+                if let Some(pid) = self.owned_pid("startup.pid") {
+                    unsafe {
+                        libc::kill(pid, libc::SIGTERM);
+                    }
+                }
                 let _ = child.kill();
                 let _ = child.wait();
                 let _ = fs::remove_file(self.dir.join("daemon.pid"));
@@ -132,6 +157,30 @@ impl Controller {
             }
             thread::sleep(Duration::from_millis(100));
         }
+    }
+
+    fn launch_command(&self, launch_id: &str) -> Result<Command, String> {
+        let app = self
+            .daemon
+            .ancestors()
+            .nth(3)
+            .ok_or("Lokasi aplikasi helper tidak valid")?;
+        let mut command = Command::new("/usr/bin/open");
+        command
+            .args(["-g", "-n"])
+            .arg(app)
+            .arg("--args")
+            .arg("--state-dir")
+            .arg(&self.dir)
+            .arg("--launch-id")
+            .arg(launch_id);
+        Ok(command)
+    }
+
+    fn startup_report(&self, launch_id: &str) -> Option<serde_json::Value> {
+        let report: serde_json::Value =
+            serde_json::from_slice(&fs::read(self.dir.join("startup.json")).ok()?).ok()?;
+        (report["launchID"].as_str() == Some(launch_id)).then_some(report)
     }
 
     fn stop(&self) -> Result<String, String> {
@@ -331,6 +380,63 @@ mod tests {
         assert!(c.action("idam-toggle").unwrap_err().contains("tidak valid"));
         fake_idam(&c, "#!/bin/sh\necho 'device not paired' >&2\nexit 4\n");
         assert_eq!(c.action("idam-toggle").unwrap_err(), "device not paired");
+    }
+
+    #[test]
+    fn startup_reports_ignore_old_launches_and_partial_json() {
+        let dir = tempfile::tempdir().unwrap();
+        let c = controller(dir.path());
+        let file = dir.path().join("startup.json");
+        assert!(c.startup_report("new").is_none());
+        fs::write(&file, "partial").unwrap();
+        assert!(c.startup_report("new").is_none());
+        fs::write(
+            &file,
+            r#"{"launchID":"old","phase":"failed","message":"old error"}"#,
+        )
+        .unwrap();
+        assert!(c.startup_report("new").is_none());
+        fs::write(
+            &file,
+            r#"{"launchID":"new","phase":"failed","message":"permission denied"}"#,
+        )
+        .unwrap();
+        assert_eq!(
+            c.startup_report("new").unwrap()["message"],
+            "permission denied"
+        );
+    }
+
+    #[test]
+    fn launch_services_receives_app_path_and_state_as_separate_arguments() {
+        let dir = tempfile::tempdir().unwrap();
+        let mut c = controller(dir.path());
+        c.daemon = dir
+            .path()
+            .join("iPhone Stream Helper.app/Contents/MacOS/iphone-stream-daemon");
+        c.dir = dir.path().join("data with spaces");
+        let command = c.launch_command("attempt-1").unwrap();
+        assert_eq!(command.get_program(), "/usr/bin/open");
+        let args: Vec<_> = command
+            .get_args()
+            .map(|s| s.to_string_lossy().into_owned())
+            .collect();
+        assert_eq!(
+            args,
+            vec![
+                "-g".into(),
+                "-n".into(),
+                dir.path()
+                    .join("iPhone Stream Helper.app")
+                    .to_string_lossy()
+                    .into_owned(),
+                "--args".into(),
+                "--state-dir".into(),
+                c.dir.to_string_lossy().into_owned(),
+                "--launch-id".into(),
+                "attempt-1".into()
+            ]
+        );
     }
 
     #[test]

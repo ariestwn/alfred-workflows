@@ -13,7 +13,12 @@ let EXIT_TCC_DENIED: Int32 = 10
 // MARK: - Paths
 let HOME = FileManager.default.homeDirectoryForCurrentUser
 // Alfred has its own state directory; never control the Raycast daemon's PID.
-let stateDir = ProcessInfo.processInfo.environment["IPHONE_STREAM_STATE_DIR"].map {
+func argument(_ name: String) -> String? {
+    guard let index = CommandLine.arguments.firstIndex(of: name), index + 1 < CommandLine.arguments.count else { return nil }
+    return CommandLine.arguments[index + 1]
+}
+let launchID = argument("--launch-id") ?? "manual"
+let stateDir = (argument("--state-dir") ?? ProcessInfo.processInfo.environment["IPHONE_STREAM_STATE_DIR"]).map {
     URL(fileURLWithPath: $0, isDirectory: true)
 } ?? HOME.appendingPathComponent("Library/Application Support/Alfred/Workflow Data/com.ariestwn.iphone-stream")
 let stateFile = stateDir.appendingPathComponent("state.json")
@@ -31,6 +36,21 @@ func writePidFile() {
 
 func clearPidFile() {
     try? FileManager.default.removeItem(at: pidFile)
+    try? FileManager.default.removeItem(at: stateDir.appendingPathComponent("startup.pid"))
+}
+
+func reportStartup(_ phase: String, message: String = "", code: Int32 = 0) {
+    let report: [String: Any] = ["launchID": launchID, "phase": phase, "message": message, "code": code, "pid": getpid()]
+    if let data = try? JSONSerialization.data(withJSONObject: report) {
+        try? data.write(to: stateDir.appendingPathComponent("startup.json"), options: .atomic)
+    }
+}
+
+func failStartup(_ code: Int32) -> Never {
+    let log = (try? String(contentsOf: stateDir.appendingPathComponent("daemon.log"), encoding: .utf8)) ?? ""
+    reportStartup("failed", message: log.split(separator: "\n").last.map(String.init) ?? "Helper gagal memulai audio.", code: code)
+    clearPidFile()
+    exit(code)
 }
 
 func logErr(_ msg: String) {
@@ -62,14 +82,14 @@ func ensureMicrophonePermission() {
         _ = sema.wait(timeout: .now() + .seconds(25))
         if !granted {
             logErr("Microphone permission not granted. Enable in System Settings → Privacy & Security → Microphone.")
-            exit(EXIT_TCC_DENIED)
+            failStartup(EXIT_TCC_DENIED)
         }
     case .denied, .restricted:
         logErr("Microphone permission denied or restricted. Enable in System Settings → Privacy & Security → Microphone.")
-        exit(EXIT_TCC_DENIED)
+        failStartup(EXIT_TCC_DENIED)
     @unknown default:
         logErr("Unknown microphone authorization status: \(status.rawValue).")
-        exit(EXIT_TCC_DENIED)
+        failStartup(EXIT_TCC_DENIED)
     }
 }
 
@@ -145,6 +165,18 @@ final class StateWatcher {
 
 // MARK: - Main
 ensureStateDir()
+// LaunchServices doesn't inherit the Rust controller's redirected stderr.
+let logPath = stateDir.appendingPathComponent("daemon.log").path
+freopen(logPath, "a", stderr)
+freopen(logPath, "a", stdout)
+try? String(getpid()).write(to: stateDir.appendingPathComponent("startup.pid"), atomically: true, encoding: .utf8)
+reportStartup("starting")
+logErr("Starting iPhone Stream Helper (bundle=\(Bundle.main.bundleIdentifier ?? "unknown"), pid=\(getpid()))")
+if CommandLine.arguments.contains("--diagnose") {
+    reportStartup("diagnosed", message: "Microphone authorization status: \(AVCaptureDevice.authorizationStatus(for: .audio).rawValue)")
+    clearPidFile()
+    exit(EXIT_OK)
+}
 ensureMicrophonePermission()
 
 if !FileManager.default.fileExists(atPath: stateFile.path) {
@@ -154,7 +186,7 @@ if !FileManager.default.fileExists(atPath: stateFile.path) {
 
 guard let iphone = findIPhone() else {
     logErr("No iPhone audio device found. Connect via USB and enable 'Inter-device Audio and MIDI Mode' in Audio MIDI Setup.app.")
-    exit(EXIT_NO_IPHONE)
+    failStartup(EXIT_NO_IPHONE)
 }
 
 let session = AVCaptureSession()
@@ -165,11 +197,11 @@ do {
     input = try AVCaptureDeviceInput(device: iphone)
 } catch {
     logErr("Failed to create input: \(error)")
-    exit(EXIT_INPUT_FAILED)
+    failStartup(EXIT_INPUT_FAILED)
 }
 guard session.canAddInput(input) else {
     logErr("Cannot add iPhone input to session.")
-    exit(EXIT_CANNOT_ADD_INPUT)
+    failStartup(EXIT_CANNOT_ADD_INPUT)
 }
 session.addInput(input)
 
@@ -178,7 +210,7 @@ preview.outputDeviceUniqueID = nil
 preview.volume = readVolume()
 guard session.canAddOutput(preview) else {
     logErr("Cannot add audio preview output.")
-    exit(EXIT_CANNOT_ADD_OUTPUT)
+    failStartup(EXIT_CANNOT_ADD_OUTPUT)
 }
 session.addOutput(preview)
 
@@ -186,7 +218,7 @@ session.commitConfiguration()
 session.startRunning()
 guard session.isRunning else {
     logErr("Audio session failed to start. Check Microphone permission and Audio MIDI Mode.")
-    exit(EXIT_RUNTIME_ERROR)
+    failStartup(EXIT_RUNTIME_ERROR)
 }
 
 let watcher = StateWatcher(path: stateFile.path) {
@@ -234,5 +266,6 @@ nc.addObserver(forName: AVCaptureSession.runtimeErrorNotification, object: sessi
 logErr("iPhone Stream daemon running (pid=\(getpid()), device=\(iphone.localizedName), modelID=\(iphone.modelID), volume=\(Int(preview.volume * 100))%)")
 // Publish readiness only after signal handlers and disconnect observers exist.
 writePidFile()
+reportStartup("running")
 
 RunLoop.main.run()

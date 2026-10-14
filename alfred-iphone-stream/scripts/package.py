@@ -43,7 +43,7 @@ def metadata():
     add("notify", "output.notification", dict(title="iPhone Stream", text="{query}", onlyshowifquerypopulated=True, lastpathcomponent=False, removeextension=False), 1100, 100)
     link("run", "notify")
     fields = [dict(variable="IPHONE_STREAM_KEYWORD", label="Keyword menu", description="Buka menu stream, volume, dan Audio MIDI.", type="textfield", config=dict(default="iphone", required=True, trim=True))]
-    return dict(bundleid=BUNDLE, name="iPhone Stream", description="iPhone USB audio streaming controlled by Rust.", createdby="ariestwn", category="Music", version="0.1.0", disabled=False,
+    return dict(bundleid=BUNDLE, name="iPhone Stream", description="iPhone USB audio streaming controlled by Rust.", createdby="ariestwn", category="Music", version="0.1.1", disabled=False,
         objects=objects, connections=connections, uidata=positions, userconfigurationconfig=fields, variables={}, variablesdontexport=[], webaddress="", readme=(ROOT / "README.md").read_text())
 
 def main():
@@ -52,7 +52,7 @@ def main():
     helper.mkdir(parents=True, exist_ok=True)
     (helper / "Info.plist").write_bytes(plistlib.dumps(dict(
         CFBundleIdentifier=BUNDLE + ".helper", CFBundleName="iPhone Stream Helper", CFBundleExecutable="iphone-stream-daemon",
-        CFBundlePackageType="APPL", CFBundleVersion="1", CFBundleShortVersionString="0.1.0", LSMinimumSystemVersion="14.0", LSUIElement=True,
+        CFBundlePackageType="APPL", CFBundleVersion="2", CFBundleShortVersionString="0.1.1", LSMinimumSystemVersion="14.0", LSUIElement=True,
         NSMicrophoneUsageDescription="Play audio from your USB-connected iPhone through your Mac."), sort_keys=False))
     if "--metadata-only" in sys.argv:
         return
