@@ -15,6 +15,7 @@ rust_workflows=(
     "calculator|alfred-calculator|Calculator Rust"
     "emoji|alfred-emoji|Emoji"
     "handy|alfred-handy|Handy Rust"
+    "iphone-stream|alfred-iphone-stream|iPhone Stream"
     "kraely-upload|alfred-kraely-upload|Upload to Remote"
     "my-schedule|alfred-my-schedule|My Schedule"
     "quickai|alfred-quickai|QuickAI"

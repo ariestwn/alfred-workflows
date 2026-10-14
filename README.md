@@ -1,6 +1,6 @@
 # Alfred Workflows
 
-Ten workflows for [Alfred 5](https://www.alfredapp.com) on macOS: a calculator, an emoji picker, an app uninstaller, a calendar agenda, AI chat and writing tools, and more. Most are native Rust binaries with no runtime dependencies.
+Eleven workflows for [Alfred 5](https://www.alfredapp.com) on macOS: a calculator, an emoji picker, an app uninstaller, a calendar agenda, iPhone USB audio, AI chat and writing tools, and more. Most are native Rust binaries with no runtime dependencies.
 
 Every workflow with native code has **two downloads: one for Apple Silicon and one for Intel**. Each download contains a binary for that CPU only, so pick the one that matches your Mac. AI Chat has no native code, so a single download works on both.
 
@@ -134,6 +134,20 @@ Bit-perfect Apple Music: a background helper detects each track's real sample ra
 
 - The menu bar card shows artwork, format, playback controls, and the device's current format. Right-click for **Switch Format**, auto-follow, and sample-rate text in the menu bar.
 - Requires macOS 13+ and a DAC or audio interface with more than one sample rate.
+
+### iPhone Stream
+
+Play iPhone audio over USB through the Mac's default output, with a Rust controller and native Swift helpers adapted from the local Raycast extension. Source and setup: [`alfred-iphone-stream`](alfred-iphone-stream/README.md). This workflow is currently built locally; no published release yet.
+
+| Keyword | Action |
+| --- | --- |
+| `iphone [query]` | Browse stream controls and see current status/volume |
+| `istream` | Start or stop USB audio playthrough |
+| `ivup` / `ivdown` | Increase / decrease volume by 10% |
+| `imidi` | Enable or disable iPhone Audio MIDI Mode |
+
+- Includes configurable hotkeys, external triggers, Audio MIDI Setup access, and daemon logs.
+- Requires macOS 14+, an attached trusted iPhone, Audio MIDI Mode, and Microphone permission. Build with `cd alfred-iphone-stream && ./build.sh`, then import the archive from `dist/`.
 
 ### My Schedule
 

@@ -10,6 +10,9 @@ release/
 /alfred-emoji/workflow/icons/
 /alfred-emoji/workflow/model/
 /alfred-screenshots-rust/workflow/shots
+/alfred-iphone-stream/workflow/iphone-stream
+/alfred-iphone-stream/workflow/idam-helper
+/alfred-iphone-stream/workflow/iPhone Stream Helper.app/
 
 # Local settings and secrets
 .env

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show command failures through Alfred's notification output too.
+cd "$(dirname "$0")" || exit 1
+./iphone-stream "$1" 2>/dev/null
+exit 0
