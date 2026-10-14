@@ -15,6 +15,7 @@ All workflows need Alfred 5 with the [Powerpack](https://www.alfredapp.com/power
 | [Emoji](#emoji) | Emoji picker with offline semantic search | [0.2.0](https://github.com/ariestwn/alfred-workflows/releases/download/emoji-v0.2.0/emoji-0.2.0-apple-silicon.alfredworkflow) | [0.2.0](https://github.com/ariestwn/alfred-workflows/releases/download/emoji-v0.2.0/emoji-0.2.0-intel.alfredworkflow) |
 | [Handy Rust](#handy-rust) | Control Handy speech-to-text | [0.1.0](https://github.com/ariestwn/alfred-workflows/releases/download/handy-v0.1.0/handy-0.1.0-apple-silicon.alfredworkflow) | [0.1.0](https://github.com/ariestwn/alfred-workflows/releases/download/handy-v0.1.0/handy-0.1.0-intel.alfredworkflow) |
 | [Apple Music + Audio Format](#apple-music--audio-format) | Bit-perfect playback: match your DAC to the track | [1.0.0](https://github.com/ariestwn/alfred-workflows/releases/download/music-v1.0.0/music-1.0.0-apple-silicon.alfredworkflow) | [1.0.0](https://github.com/ariestwn/alfred-workflows/releases/download/music-v1.0.0/music-1.0.0-intel.alfredworkflow) |
+| [iPhone Stream](#iphone-stream) | Play iPhone USB audio through your Mac or DAC | [Build from source](alfred-iphone-stream/README.md#build-dan-pemeriksaan) | [Build from source](alfred-iphone-stream/README.md#build-dan-pemeriksaan) |
 | [My Schedule](#my-schedule) | Calendar agenda, join calls, free slots, new events | [0.1.2](https://github.com/ariestwn/alfred-workflows/releases/download/my-schedule-v0.1.2/my-schedule-0.1.2-apple-silicon.alfredworkflow) | [0.1.2](https://github.com/ariestwn/alfred-workflows/releases/download/my-schedule-v0.1.2/my-schedule-0.1.2-intel.alfredworkflow) |
 | [QuickAI](#quickai) | Fix, improve, or grammar-check selected text | [0.2.0](https://github.com/ariestwn/alfred-workflows/releases/download/quickai-v0.2.0/quickai-0.2.0-apple-silicon.alfredworkflow) | [0.2.0](https://github.com/ariestwn/alfred-workflows/releases/download/quickai-v0.2.0/quickai-0.2.0-intel.alfredworkflow) |
 | [Screenshots Rust](#screenshots-rust) | Browse thousands of screenshots in a grid | [0.1.0](https://github.com/ariestwn/alfred-workflows/releases/download/screenshots-rust-v0.1.0/screenshots-rust-0.1.0-apple-silicon.alfredworkflow) | [0.1.0](https://github.com/ariestwn/alfred-workflows/releases/download/screenshots-rust-v0.1.0/screenshots-rust-0.1.0-intel.alfredworkflow) |
@@ -147,7 +148,9 @@ Play iPhone audio over USB through the Mac's default output, with a Rust control
 | `imidi` | Enable or disable iPhone Audio MIDI Mode |
 
 - Includes configurable hotkeys, external triggers, Audio MIDI Setup access, and daemon logs.
-- Requires macOS 14+, an attached trusted iPhone, Audio MIDI Mode, and Microphone permission. Build with `cd alfred-iphone-stream && ./build.sh`, then import the archive from `dist/`.
+- Requires macOS 14+, an attached trusted iPhone, and Audio MIDI Mode. Build with `cd alfred-iphone-stream && ./build.sh`, then import the archive from `dist/`.
+- To start: connect and unlock your iPhone, accept **Trust This Computer**, run `imidi` to enable Audio MIDI Mode, then run `istream`. Allow Microphone access for **iPhone Stream Helper** when prompted. The helper runs in the background automatically; you do not need to open it manually.
+- Play an unmuted video or music on the iPhone. Audio uses the Mac's default output, including USB DACs; `ivup` and `ivdown` adjust stream volume separately from Mac output volume.
 
 ### My Schedule
 
